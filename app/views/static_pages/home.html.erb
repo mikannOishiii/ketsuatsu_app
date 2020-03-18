@@ -1,2 +1,18 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+
+  <div class="container">
+    <div class="row d-flex align-items-center">
+      <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1" data-aos="fade-right">
+        <h1>かんたん血圧管理</h1>
+        <h2>高血圧予防に。グラフで血圧推移を可視化、PDF出力もできます。</h2>
+          <%= link_to "今すぐはじめる", root_path, class: "btn-get-started scrollto" %>
+          <a href="#about" class="btn-get-logined" data-toggle="modal" data-target="#loginModal">ログインはこちら</a>
+      </div>
+      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
+        <%= image_tag '/assets/hero-img.png', class: 'img-fluid' %>
+      </div>
+    </div>
+  </div>
+
+</section><!-- End Hero -->

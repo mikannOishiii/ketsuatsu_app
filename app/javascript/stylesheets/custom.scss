@@ -1,0 +1,636 @@
+/*--------------------------------------------------------------
+# Reset CSS
+--------------------------------------------------------------*/
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+$color-blue: #78BBE6;
+$color-paleblue: #D5EEFF;
+$color-orange: #F99F48;
+$color-white: #FFF;
+$color-navy: #1B435D;
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+  background-color: #EFEFEF;
+}
+
+a {
+  color: $color-orange;
+  :hover {
+    color: #fdd067;
+    text-decoration: none;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+.section-title {
+  margin-bottom: 12px;
+}
+
+.section-bg {
+  background: #EFEFEF;
+  padding-top: 30px;
+}
+
+.content-area {
+  background-color: $color-white;
+  padding: 20px;
+  box-shadow: 0px 0px 2px rgba(0,0,0,.15);
+  border: .5px solid #d9d9d9 !important;
+  border-radius: 4px;
+}
+
+.btn-blue {
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: $color-blue;
+  border: none;
+  color: $color-white;
+  margin-top: 10px;
+  &:hover {
+    background-color: $color-orange;
+    color: $color-white;
+  }
+}
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  right: 15px;
+  bottom: 15px;
+  background: #284864;
+  color: $color-white;
+  transition: display 0.5s ease-in-out;
+  z-index: 99999;
+  transition: all ease-in-out 0.3s;
+  i {
+    font-size: 24px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+  }
+  :hover {
+    color: $color-white;
+    background: $color-orange;
+  }
+}
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+#header {
+  height: 80px;
+  transition: all 0.5s;
+  z-index: 997;
+  transition: all 0.5s;
+  padding: 16px 0;
+  background: $color-blue;
+  .logo h1 {
+    font-size: 36px;
+    margin: 0;
+    padding: 10px 0;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-family: "Poppins", sans-serif;
+    a, a:hover {
+      color: $color-white;
+      text-decoration: none;
+    }
+    a span, a:hover span {
+      color: $color-orange;
+      font-size: 30px;
+    }
+  }
+  .logo img {
+    padding: 0;
+    margin: 0;
+    max-height: 40px;
+  }
+  .logo.mr-auto, .mx-auto {
+    margin-right: auto!important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/* Desktop Navigation */
+.nav-menu, .nav-menu * {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-menu {
+  > ul > li {
+    position: relative;
+    white-space: nowrap;
+    float: left;
+  }
+  ul {
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+  a {
+    display: block;
+    position: relative;
+    color: $color-paleblue;
+    padding: 10px 15px;
+    transition: 0.3s;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+  }
+  a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
+    color: $color-white;
+    text-decoration: none;
+  }
+  .get-started a {
+    background: $color-blue;
+    color: $color-white;
+    border-radius: 50px;
+    margin: 2px 0 0 15px;
+    padding: 4px 25px 6px 25px;
+    border: 2px solid $color-orange;
+    &:hover {
+      background: $color-orange;
+    }
+  }
+  .get-recorded a {
+    background: $color-white;
+    color: $color-navy;
+    border-radius: 50px;
+    margin: 2px 15px 0 0;
+    padding: 4px 25px;
+    border: 2px solid $color-navy;
+    &:hover {
+      background: $color-orange;
+      color: $color-white;
+      border: 2px solid $color-orange;
+    }
+  }
+}
+
+.nav-menu .drop-down {
+  ul {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: calc(100% - 30px);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px 0;
+    background: $color-white;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    transition: ease all 0.3s;
+    a {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: none;
+      color: #3e6f9b;
+    }
+    a:hover, .active > a, li:hover > a {
+      color: $color-orange;
+    }
+  }
+  &:hover > ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+  }
+  li {
+    min-width: 180px;
+    position: relative;
+  }
+  > a:after {
+    content: "\ea99";
+    font-family: IcoFont;
+    padding-left: 5px;
+  }
+}
+
+.nav-menu .drop-down .drop-down {
+  ul {
+    top: 0;
+    left: calc(100% - 30px);
+    @media (max-width: 1366px) {
+      left: -90%;
+    }
+  }
+  &:hover > ul {
+    opacity: 1;
+    top: 0;
+    left: 100%;
+    @media (max-width: 1366px) {
+      left: -100%;
+    }
+  }
+  > a {
+    padding-right: 35px;
+  }
+  > a:after {
+    content: "\eaa0";
+    font-family: IcoFont;
+    position: absolute;
+    right: 15px;
+    @media (max-width: 1366px) {
+      content: "\ea9d";
+    }
+  }
+}
+
+/* Mobile Navigation */
+.mobile-nav-toggle {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  z-index: 9998;
+  border: 0;
+  background: none;
+  font-size: 24px;
+  transition: all 0.4s;
+  outline: none !important;
+  line-height: 1;
+  cursor: pointer;
+  text-align: right;
+  i {
+    color: $color-orange;
+  }
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 55px;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  z-index: 9999;
+  overflow-y: auto;
+  background: $color-white;
+  transition: ease-in-out 0.2s;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 10px;
+  padding: 10px 0;
+  * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  a {
+    display: block;
+    position: relative;
+    color: $color-blue;
+    padding: 10px 20px;
+    font-weight: 500;
+    outline: none;
+    transition: 0.3s;
+  }
+  a:hover, .active > a, li:hover > a {
+    color: $color-orange;
+    text-decoration: none;
+  }
+  .active.drop-down > a:after {
+    content: "\eaa1";
+  }
+}
+
+.mobile-nav .drop-dow {
+  > a {
+    padding-right: 35px;
+    &:after {
+      content: "\ea99";
+      font-family: IcoFont;
+      padding-left: 10px;
+      position: absolute;
+      right: 15px;
+    }
+  }
+  ul {
+    display: none;
+    overflow: hidden;
+  }
+  li {
+    padding-left: 20px;
+  }
+}
+
+.mobile-nav .get-started {
+  a {
+    background: $color-blue;
+    color: $color-white;
+    border-radius: 50px;
+    margin: 15px;
+    padding: 8px 25px 10px 25px;
+    text-align: center;
+    &:hover {
+      background: $color-orange;
+      color: $color-blue;
+    }
+  }
+}
+
+.mobile-nav-overly {
+  width: 100%;
+  height: 100%;
+  z-index: 9997;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: rgba(18, 33, 46, 0.6);
+  overflow: hidden;
+  display: none;
+  transition: ease-in-out 0.2s;
+}
+
+.mobile-nav-active {
+  overflow: hidden;
+  .mobile-nav {
+    opacity: 1;
+    visibility: visible;
+  }
+  .mobile-nav-toggle i {
+    olor: $color-white;
+  }
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  padding: 0 0 0 0;
+  background: $color-blue;
+  background: linear-gradient(180deg, $color-blue 0%, #78BBE9 35%, #73c0f5 100%);
+  h1 {
+    margin: 0 0 15px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: $color-paleblue;
+    font-family: "Poppins", sans-serif;
+    @media (max-width: 768px) {
+      font-size: 28px;
+      line-height: 36px;
+    }
+  }
+  h2 {
+    color: $color-white;
+    margin-bottom: 30px;
+    font-size: 22px;
+    @media (max-width: 768px) {
+      font-size: 18px;
+      line-height: 24px;
+      margin-bottom: 30px;
+    }
+  }
+  .btn-get-started,
+  .btn-get-logined {
+    color: $color-white;
+    border-radius: 50px;
+    padding: 8px 35px 10px 35px;
+    transition: all ease-in-out 0.3s;
+    display: inline-block;
+    &:hover {
+      text-decoration: none;
+      background: transparent;
+    }
+  }
+  .btn-get-started {
+    border: 2px solid $color-orange;
+    background: $color-orange;
+    margin-right: 15px;
+    &:hover {
+      color: $color-white;
+    }
+  }
+  .btn-get-logined {
+    border: 2px solid $color-white;
+    &:hover {
+      background: $color-white;
+      color: $color-navy;
+      border: 2px solid $color-navy
+    }
+  }
+  @media (max-width: 768px) {
+    -moz-text-align-last: center;
+    text-align-last: center;
+  }
+}
+
+#hero {
+  .hero-img {
+    @media (max-width: 991px) {
+      text-align: center;
+    }
+    img {
+      @media (max-width: 991px) {
+        width: 50%;
+      }
+      @media (max-width: 768px) {
+        width: 70%;
+      }
+      @media (max-width: 575px) {
+        width: 80%;
+      }
+    }
+  }
+}
+
+#loginModal {
+  .nav-pills {
+  }
+  .nav-link {
+    padding: 15px 0;
+  }
+  .nav-link.active {
+    background: $color-blue;
+  }
+}
+
+/*--------------------------------------------------------------
+# Dashboad Section
+--------------------------------------------------------------*/
+#dashboard-section {
+  margin-top: 80px;
+  .select-box {
+    max-width: 300px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Dashboad Section
+--------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------
+# Table Section
+--------------------------------------------------------------*/
+
+.table-area {
+  background-color: $color-white;
+  padding: 20px;
+  box-shadow: 0px 0px 2px rgba(0,0,0,.15);
+  border: .5px solid #d9d9d9 !important;
+  border-radius: 4px;
+}
+
+.daily-report {
+
+}
+
+/*--------------------------------------------------------------
+# Signup Section
+--------------------------------------------------------------*/
+
+#signup-section {
+  background-color: $color-blue;
+}
+
+.registration-form,
+.modal-content {
+  background-color: $color-white;
+  margin: 50px auto;
+  border-radius: 30px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+  form {
+    margin: 50px 30px;
+    .login_title {
+      font-size: 24px;
+      text-align: center;
+    }
+    @media (max-width: 576px) {
+      padding: 50px 20px;
+    }
+  }
+  .item {
+    border-radius: 20px;
+    padding: 10px 20px;
+  }
+  .create-account {
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: $color-blue;
+    border: none;
+    color: white;
+    margin-top: 10px;
+    &:hover {
+      background-color: $color-orange;
+    }
+  }
+  .checkbox {
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+.registration-form {
+  .item {
+    width: 300px;
+  }
+}
+.social-media {
+  margin-bottom: 50px;
+  text-align: center;
+  color: #9fadca;
+}
+.social-icons {
+  margin: 15px 0;
+  a {
+    font-size: 23px;
+    margin: 0 3px;
+    color: $color-blue;
+    border: 1px solid;
+    border-radius: 50%;
+    width: 45px;
+    display: inline-block;
+    height: 45px;
+    text-align: center;
+    background-color: $color-white;
+    line-height: 45px;
+    &:hover {
+      text-decoration: none;
+      opacity: 0.6;
+    }
+  }
+}
