@@ -1,0 +1,33 @@
+<div class="modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Modal -->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div id="nameLogin" class="tab-pane active">
+        <%= form_for(resource, as: resource_name, url: login_path) do |f| %>
+        <div class="form-group">
+            <%= f.text_field :account_name, autocomplete: "account_name", class: "form-control item", placeholder: "アカウント名" %>
+        </div>
+        <div class="form-group">
+            <%= f.password_field :password, class: "form-control item", placeholder: "Password",  autocomplete: "current-password" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "ログイン", class: "btn btn-block btn-blue" %>
+          <div class="checkbox">
+            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <div id="snsLogin" class="tab-pane">
+        <div class="social-media">
+          <h5>SNSでログインする</h5>
+          <div class="social-icons">
+            <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
+            <a href="#"><i class="icon-social-github" title="Github"></i></a>
+            <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -39,7 +39,7 @@ footer,header,hgroup,menu,nav,section {
     display:block;
 }
 
-nav ul {
+nav ul, li {
     list-style:none;
 }
 
@@ -88,6 +88,10 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
+}
+
+#hero, #error-message-section {
+  padding-top: 80px;
 }
 
 .section-title {
@@ -149,7 +153,33 @@ h1, h2, h3, h4, h5, h6 {
     background: $color-orange;
   }
 }
+/*--------------------------------------------------------------
+# ErrorMessage section
+--------------------------------------------------------------*/
+#error-message-section {
+  background: $color-blue;
+}
+.error_explanation_container {
+  width: 600px;
+  margin: 0 auto;
+}
 
+#error_explanation {
+  border-radius: 10px;
+  padding: 10px;
+  ul {
+    margin-top: 10px;
+  }
+}
+.alert {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.list-group-item-success,
+.list-group-item-danger {
+  border-radius: 10px;
+}
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -524,7 +554,13 @@ h1, h2, h3, h4, h5, h6 {
     background: $color-blue;
   }
 }
+/*--------------------------------------------------------------
+# Login Section
+--------------------------------------------------------------*/
 
+#login-section {
+  background: $color-blue;
+}
 /*--------------------------------------------------------------
 # Dashboad Section
 --------------------------------------------------------------*/

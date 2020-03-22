@@ -1,0 +1,30 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+  <div class="container d-flex">
+
+    <div class="logo mr-auto">
+      <h1 class="text-light">
+        <%= link_to root_path do %>血圧管理<span>+plus</span><% end %>
+      </h1>
+    </div>
+
+    <nav class="nav-menu d-none d-lg-block">
+      <ul>
+        <li class="get-recorded">
+          <%= link_to "記入する", root_path, remote: :true, id: "record-modal", data: {toggle: "modal", target: "#recordModal"} %>
+        </li>
+        <li>
+          <%= link_to "プリント", root_path %>
+        </li>
+        <li class="drop-down"><a href="">hogehogeさん</a>
+          <ul>
+            <li><%= link_to "プロフィール編集", logout_path %></li>
+            <li><%= link_to "設定変更", logout_path %></li>
+            <li><%= link_to "ログアウト", logout_path %></li>
+          </ul>
+        </li>
+      </ul>
+    </nav><!-- .nav-menu -->
+
+  </div>
+</header><!-- End Header -->

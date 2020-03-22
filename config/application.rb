@@ -32,6 +32,7 @@ module KetsuatsuApp
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    # Rspec 設定
     config.generators do |g|
       g.test_framework :rspec,
       fixtures: false,
@@ -39,5 +40,10 @@ module KetsuatsuApp
       helper_specs: false,
       routing_specs: false
     end
+
+    # デフォルトのlocaleを日本語(:ja)に設定
+    config.i18n.default_locale = :ja
+    # 利用可能な locale のホワイトリスト
+    config.i18n.available_locales = [:en, :ja]
   end
 end
