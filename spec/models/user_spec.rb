@@ -53,4 +53,10 @@ RSpec.describe User, type: :model do
     user = create(:user, email: "Foo@ExAMPle.CoM")
     expect(user.email.downcase).to eq user.reload.email
   end
+
+  it "userを削除すると、紐づくrecordも削除されること" do
+    user = create(:user)
+    user.records.create!(date: 2020/03/22, m_sbp: 132, m_dbp: 84, m_pulse: 64)
+    expect { user.destroy }.to change { Record.count }.by(-1)
+  end
 end
