@@ -2,6 +2,12 @@
 <section id="dashboard-section">
 
   <div class="container">
+    <table class="table table-hover">
+      <thead>
+      </thead>
+    </table>
   </div>
 
 </section><!-- End Dashboard -->
+<%= render 'table', records: @records %>
+<%= render 'records/form', record: @record %>

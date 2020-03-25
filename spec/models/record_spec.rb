@@ -24,8 +24,8 @@ RSpec.describe Record, type: :model do
   end
 
   it "数値が空でも有効であること" do
-    record = build(:record, user: user, m_sbp: "")
-    expect(record).to be_valid
+    record = build(:record, user: user)
+    expect(record).not_to be_valid
   end
 
   it "日付がないと無効であること" do
@@ -34,9 +34,8 @@ RSpec.describe Record, type: :model do
   end
 
   it "日付が重複していると無効であること" do
-    record = create(:record, user: user)
-    other_record = build(:record, user: user)
-    expect(other_record).not_to be_valid
+    record = build(:record, user: user, date: "")
+    expect(record).not_to be_valid
   end
 
   it "メモは25文字以内であること" do

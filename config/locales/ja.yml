@@ -6,6 +6,18 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      record:
+    attributes:
+      record:
+        date: 日付
+        m_sbp: 朝の最高血圧
+        m_dbp: 朝の最低血圧
+        m_pulse: 朝の脈拍
+        n_sbp: 夜の最高血圧
+        n_dbp: 夜の最高血圧
+        n_pulse: 夜の脈拍
+        memo: メモ
   date:
     abbr_day_names:
     - 日

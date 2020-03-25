@@ -13,4 +13,11 @@ class Record < ApplicationRecord
     validates :n_dbp
     validates :n_pulse
   end
+
+  scope :search_with_date, ->(date) { where("date = ?", date) }
+
+  # 今月
+  scope :current_month, -> { where(date: Time.now.beginning_of_month..Time.now.end_of_month) }
+  # 先月
+  scope :last_month, -> { where(date: Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month) }
 end

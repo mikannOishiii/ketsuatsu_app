@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
+
+  private
+
+  def record_params
+    params.require(:record).permit(:date, :m_sbp, :m_dbp, :m_pulse,
+                                   :n_sbp, :n_dbp, :n_pulse, :memo,)
+          .merge(user_id: current_user.id)
+  end
 end

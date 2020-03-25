@@ -13,6 +13,12 @@ Rails.application.routes.draw do
     post '/login', to: 'users/sessions#create'
     get '/logout', to: 'users/sessions#destroy'
   end
+  resources :records, only: [:new, :create, :update, :destroy] do
+    collection do
+      get 'search'
+    end
+  end
+  post 'create_or_update', to: 'records#create_or_update'
   get '/terms', to: 'static_pages#terms'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
