@@ -1,5 +1,5 @@
-<% @records.each do |record| %>
-  <tr>
+<% records.each do |record| %>
+  <tr id="record_<%= record.id %>">
     <th scope='row'><%= record.date %></th>
     <td><%= record.m_sbp %></td>
     <td><%= record.m_dbp %></td>

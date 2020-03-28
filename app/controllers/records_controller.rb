@@ -46,6 +46,22 @@ class RecordsController < ApplicationController
     end
   end
 
+  # def search_dates
+  #   @user = current_user
+  #   if params[:date] == "1"
+  #     @records = @user.records.current_month
+  #   elsif params[:date] == "2"
+  #     @records = @user.records.last_month
+  #   elsif params[:date] == "3"
+  #     @records = @user.records.last_week
+  #   end
+  #   respond_to do |format|
+  #     format.html
+  #     format.json {render json: @records}
+  #     format.js
+  #   end
+  # end
+
   private
 
   def record_params

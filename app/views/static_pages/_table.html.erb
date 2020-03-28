@@ -15,18 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <% records.each do |record| %>
-            <tr>
-              <th scope='row'><%= record.date %></th>
-              <td><%= record.m_sbp %></td>
-              <td><%= record.m_dbp %></td>
-              <td><%= record.m_pulse %></td>
-              <td><%= record.n_sbp %></td>
-              <td><%= record.n_dbp %></td>
-              <td><%= record.n_pulse %></td>
-              <td><%= record.memo %></td>
-            </tr>
-          <% end %>
+          <%= render 'record', records: @records %>
         </tbody>
       </table>
     </div>

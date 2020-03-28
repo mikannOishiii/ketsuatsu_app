@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   resources :records, only: [:new, :create, :update, :destroy] do
     collection do
       get 'search'
+      # post 'search_dates'
     end
   end
-  post 'create_or_update', to: 'records#create_or_update'
   get '/terms', to: 'static_pages#terms'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
