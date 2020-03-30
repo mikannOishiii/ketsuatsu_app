@@ -1,5 +1,7 @@
 <% if user_signed_in? %>
-  <%= render 'dashboard', records: @records, record: @record %>
+  <%= render 'chart', records: @records %>
+  <%= render 'table', records: @records %>
+  <%= render 'records/form', record: @record %>
 <% else %>
   <%= render 'welcome' %>
 <% end %>

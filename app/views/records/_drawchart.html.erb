@@ -1,0 +1,91 @@
+<script>
+  // ページ読み込み時にグラフを描画
+  drawChart();
+
+  // グラフ描画処理
+  function drawChart() {
+    var ctx = document.getElementById('canvas').getContext('2d');
+    window.myChart = new Chart(ctx, { // インスタンスをグローバル変数で生成
+      type: 'line',
+      data: {
+        labels: <%= @records.pluck(:date).to_json.html_safe %>,
+        datasets: [{
+          label: '最高血圧(朝)',
+          data: <%= @records.pluck(:m_sbp).to_json.html_safe %>,
+          borderWidth: 3,
+          borderColor: 'Tomato',
+          pointBorderColor: '#fff',
+          pointBackgroundColor: 'Tomato',
+          pointStyle: 'circle',
+          radius: 6,
+          fill: false,
+        }, {
+          label: '最低血圧(朝)',
+          data: <%= @records.pluck(:m_dbp).to_json.html_safe %>,
+          borderWidth: 3,
+          borderColor: 'Tomato',
+          pointBackgroundColor: 'Tomato',
+          pointStyle: 'crossRot',
+          radius: 6,
+          fill: false,
+        }, {
+          label: '最高血圧(夜)',
+          data: <%= @records.pluck(:n_sbp).to_json.html_safe %>,
+          borderWidth: 3,
+          borderColor: '#66ccff',
+          pointBorderColor: '#fff',
+          pointBackgroundColor: '#66ccff',
+          pointStyle: 'circle',
+          radius: 6,
+          fill: false,
+        }, {
+          label: '最低血圧(夜)',
+          data: <%= @records.pluck(:n_dbp).to_json.html_safe %>,
+          borderWidth: 3,
+          borderColor: '#66ccff',
+          pointBackgroundColor: '#66ccff',
+          pointStyle: 'crossRot',
+          radius: 6,
+          fill: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: '期間切替後のマウスオンエラー対応中'
+        },
+        tooltips: {
+          mode: 'index',
+          axis: 'y',
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+            },
+            ticks: {
+              minRotation: 0,   // ┐表示角度水平
+              maxRotation: 0,   // ┘
+              maxTicksLimit: 7  // 最大表示数
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: '血圧値(mmHg)'
+            },
+            ticks: {
+              min: 50,
+              max: 200,
+              stepSize: 50
+            }
+          }]
+        }
+      },
+    });
+    window.chartLib= window.chartLib|| {};
+    window.chartLib.drawChart = drawChart;
+  }
+</script>

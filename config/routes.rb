@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :records, only: [:new, :create, :update, :destroy] do
     collection do
       get 'search'
-      # post 'search_dates'
+      post 'date_range'
     end
   end
   get '/terms', to: 'static_pages#terms'

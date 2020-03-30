@@ -9,7 +9,6 @@ require("@rails/activestorage").start()
 require("channels")
 require("jquery")
 require("custom/record_change")
-// require("custom/dates_change")
 require("chartkick")
 require("chart.js")
 // import jquery from 'jquery';

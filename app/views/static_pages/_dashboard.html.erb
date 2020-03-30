@@ -1,17 +1,3 @@
-<!-- ======= Dashboard Section ======= -->
-<section id="dashboard-section" class="section-bg">
-  <div class="container d-flex justify-content-between">
-    <h2 class="section-title">Dashboad</h2>
-  </div>
-  <div class="container">
-    <li><%= @m_sbp_avg %></li>
-    <li><%= @m_dbp_avg %></li>
-    <li><%= @m_pulse_avg %></li>
-    <li><%= @n_sbp_avg %></li>
-    <li><%= @n_nbp_avg %></li>
-    <li><%= @n_pulse_avg %></li>
-  </div>
-</section><!-- End Dashboard Section -->
-<%= render 'chart', dates: @dates, m_sbp: @m_sbp, m_dbp: @m_dbp, m_pulse: @m_pulse, n_sbp: @n_sbp, n_dbp: @n_dbp, n_pulse: @n_pulse %>
+<%= render 'chart', records: @records %>
 <%= render 'table', records: @records %>
 <%= render 'records/form', record: @record %>
