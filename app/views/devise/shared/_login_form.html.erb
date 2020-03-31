@@ -3,6 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div id="nameLogin" class="tab-pane active">
+        <% resource = User.new unless resource %>
         <%= form_for(resource, as: resource_name, url: login_path) do |f| %>
         <div class="form-group">
             <%= f.text_field :account_name, autocomplete: "account_name", class: "form-control item", placeholder: "アカウント名" %>

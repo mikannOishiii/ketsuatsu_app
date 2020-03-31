@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_043041) do
+ActiveRecord::Schema.define(version: 2020_03_31_030831) do
 
   create_table "records", force: :cascade do |t|
     t.date "date"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(version: 2020_03_22_043041) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "accepted", default: false, null: false
+    t.date "birth_date"
+    t.integer "m_sbp"
+    t.integer "m_dbp"
+    t.integer "n_sbp"
+    t.integer "n_dbp"
     t.index ["account_name"], name: "index_users_on_account_name", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

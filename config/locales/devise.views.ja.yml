@@ -41,7 +41,12 @@ ja:
         updated_at: 更新日
         account_name: アカウント名
         accepted: 利用規約に同意する
-        remember_me: "ログインを記憶"
+        remember_me: ログインを記憶
+        birth_date: 生年月日
+        m_sbp: 朝の目標最高血圧値(mmHg)
+        m_dbp: 朝の目標最低血圧値(mmHg)
+        n_sbp: 夜の目標最高血圧値(mmHg)
+        n_dbp: 夜の目標最低血圧値(mmHg)
     models:
       user: ユーザ
   devise:

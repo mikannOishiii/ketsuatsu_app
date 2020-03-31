@@ -1,24 +1,39 @@
-<!-- ======= Signup Section ======= -->
-<section id="signup-section">
-  <div class="d-flex justify-content-center">
-    <div class="registration-form">
-      <%= form_for(resource, as: resource_name, url: signup_path) do |f| %>
-      <div class="form-group">
-        <div class="login_title">アカウント登録</div>
+<%= render "signup_menu" %>
+<div class="col-md-12">
+  <%= form_for(resource, as: resource_name, url: signup_path) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="form-group row">
+      <%= f.label :account_name, class: "col-4 col-form-label" %>
+      <div class="col-8">
+        <%= f.text_field :account_name, autocomplete: "account_name", class: "form-control item", placeholder: "Username ※英数角#{@minimum_password_length}文字以上" %>
       </div>
-      <div class="form-group">
-        <%= f.text_field :account_name, autocomplete: "account_name", class: "form-control item", placeholder: "Username ※英数角6文字以上" %>
-      </div>
-      <div class="form-group">
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :password, class: "col-4 col-form-label" %>
+      <div class="col-8">
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control item", placeholder: "Password ※英数角6文字以上" %>
       </div>
-      <div class="form-group">
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :password_confirmation, class: "col-4 col-form-label" %>
+      <div class="col-8">
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control item", placeholder: "Password(確認)" %>
       </div>
-      <div class="form-group">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control item", placeholder: "メールアドレス" %>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :email, class: "col-4 col-form-label" %>
+      <div class="col-8">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control item", placeholder: "email" %>
       </div>
-      <div class="form-group">
+    </div>
+
+    <div class="form-group row">
+      <div class="col-4 col-form-label">
+      </div>
+      <div class="col-8">
         <div class="checkbox">
           <%= f.check_box :accepted,{},checked_value = "true",unchecked_value = "false" %>
           <%= f.label :accepted %>
@@ -26,18 +41,10 @@
         <div class="checkbox">
           <%= f.check_box :remember_me %> <%= f.label :remember_me %>
         </div>
-        <%= f.submit "Create Account", class: "btn btn-block create-account" %>
-      </div>
-      <% end %>
-      <div class="social-media">
-        <h5>SNSでログインする</h5>
-        <div class="social-icons">
-          <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
-          <a href="#"><i class="icon-social-github" title="Github"></i></a>
-          <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
-        </div>
       </div>
     </div>
-  </div>
-</section><!-- End Signup -->
+    <%= f.submit "Create Account", class: "btn btn-block create-account" %>
+  <% end %>
+</div>
+<%= render 'account_footer' %>
 <%= render 'devise/shared/login_form' %>

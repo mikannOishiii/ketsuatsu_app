@@ -38,6 +38,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  # GET /signup-with-sns
+  def sns
+    @user = current_user
+  end
+
+  # GET /account/password
+  def password
+    @user = current_user
+  end
+
+  # GET /account/setting
+  def setting
+    @user = current_user
+  end
+
+  # GET /account/leave
+  def leave
+    @user = current_user
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

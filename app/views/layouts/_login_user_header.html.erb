@@ -16,10 +16,10 @@
         <li>
           <%= link_to "プリント", root_path %>
         </li>
-        <li class="drop-down"><a href="">hogehogeさん</a>
+        <li class="drop-down"><a href=""><%= current_user.account_name %>さん</a>
           <ul>
-            <li><%= link_to "プロフィール編集", logout_path %></li>
-            <li><%= link_to "設定変更", logout_path %></li>
+            <li><%= link_to "プロフィール編集", account_profile_edit_path %></li>
+            <li><%= link_to "設定変更", account_setting_path %></li>
             <li><%= link_to "ログアウト", logout_path %></li>
           </ul>
         </li>

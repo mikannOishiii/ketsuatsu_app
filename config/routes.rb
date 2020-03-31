@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/signup', to: 'users/registrations#new'
     post '/signup',  to: 'users/registrations#create'
-    get '/account', to: 'users/registrations#detail'
+    get '/signup-with-sns', to: 'users/registrations#sns'
+    get '/account/profile-edit', to: 'users/registrations#edit'
+    get '/account/password-edit', to: 'users/registrations#password'
+    post '/account/update', to: 'users/registrations#update'
+    get '/account/setting', to: 'users/registrations#setting'
+    get '/account/leave', to: 'users/registrations#leave'
     get '/login', to: 'users/sessions#new'
     post '/login', to: 'users/sessions#create'
     get '/logout', to: 'users/sessions#destroy'
