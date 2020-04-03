@@ -127,6 +127,15 @@ h1, h2, h3, h4, h5, h6 {
     color: $color-white;
   }
 }
+.inactive {
+  background-color: #eee;
+  color: $color-white;
+  &:hover {
+    background-color: #eee;
+    color: $color-white;
+    cursor: default;
+  }
+}
 
 /*--------------------------------------------------------------
 # Back to top button

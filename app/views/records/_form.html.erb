@@ -1,8 +1,7 @@
 <!-- Modal -->
-<div class="modal" id="recordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <%= form_for @record do |f| %>
+      <%= form_for @record, remote: true do |f| %>
         <% if @record.errors.any? %>
           <div class="alert alert-warning">
             <ul>
@@ -51,9 +50,8 @@
           <%= f.text_area :memo, placeholder: "体の調子など", class: "form-control", id: "inputMemo", rows: "2", value: @record.memo %>
         </div>
         <div class="form-group">
-            <%= f.submit "記録する", class: "btn btn-block btn-blue" %>
+          <%= f.submit "記録する", class: "btn btn-block btn-blue", id: "record-btn" %>
         </div>
       <% end %>
     </div>
   </div>
-</div>

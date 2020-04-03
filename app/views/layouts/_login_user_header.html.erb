@@ -11,7 +11,7 @@
     <nav class="nav-menu d-none d-lg-block">
       <ul>
         <li class="get-recorded">
-          <%= link_to "記入する", new_record_path, id: "record-modal", data: {toggle: "modal", target: "#recordModal"} %>
+          <%= link_to "記入する", new_record_path, remote: true, id: "record-modal", data: {toggle: "modal", target: "#recordModal"} %>
         </li>
         <li>
           <%= link_to "プリント", root_path %>

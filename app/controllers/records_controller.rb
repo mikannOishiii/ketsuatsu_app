@@ -14,24 +14,28 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record.new(record_params)
-    if @record.save
-      redirect_to root_url
-      flash[:notice] = 'Record was successfully created.'
-    else
-      flash.now[:danger] = 'errored!'
-      render 'new'
+    respond_to do |format|
+      if @record.save
+        format.html{ redirect_to root_url, notice: 'Record was successfully created.'}
+        format.json { render :show, status: :created, location: @record }
+      else
+        format.js { render :new }
+        format.json { render json: @record.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
     @user = current_user
     @record = @user.records.find_by(date: params[:record][:date])
-    if @record.update_attributes(record_params)
-      redirect_to root_url
-      flash[:notice] = 'Record was successfully updated.'
-    else
-      flash.now[:danger] = 'errored!'
-      render 'new'
+    respond_to do |format|
+      if @record.update_attributes(record_params)
+        format.html { redirect_to root_url, notice: "Record was successfully updated" }
+        format.json { render :show, status: :created, location: @record }
+      else
+        format.js { render :new }
+        format.json { render json: @record.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -56,9 +60,9 @@ class RecordsController < ApplicationController
       @records = @user.records.last_week
     end
     respond_to do |format|
-     format.html
-     format.js
-   end
+      format.html
+      format.js
+    end
   end
 
   private
