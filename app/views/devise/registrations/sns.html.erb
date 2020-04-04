@@ -1,5 +1,9 @@
 <%= render "signup_menu" %>
 <div class="col-md-12">
+  <div class="snslogin-container">
+    <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "snslogin-btn-fb" %>
+    <%= link_to "Sign in with Twitter", user_twitter_omniauth_authorize_path, class: "snslogin-btn-tw" %>
+  </div>
 </div>
 <%= render 'account_footer' %>
 <%= render 'devise/shared/login_form' %>
