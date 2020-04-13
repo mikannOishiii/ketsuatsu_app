@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :authenticate, only: [:export]
+
   def home
     if user_signed_in?
       @user = current_user
