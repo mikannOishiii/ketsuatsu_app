@@ -25,6 +25,8 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
