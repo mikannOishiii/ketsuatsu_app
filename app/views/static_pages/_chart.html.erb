@@ -2,10 +2,7 @@
 <section id="graph-section" class="section-bg">
   <div class="container d-flex justify-content-between">
     <h2 class="section-title">Dashboad</h2>
-    <%= form_with url: date_range_records_path, class: "form-inline" do |f| %>
-      <%= f.select :date_range, [["今月", "current_month"], ["先月", "last_month"], ["直近一週間", "last_week"]],{}, { class: "form-control" } %>
-      <%= f.submit "切替", class: "form-control" %>
-    <% end %>
+    <%= render 'date_range' %>
   </div>
   <div class='container'>
     <div class='row'>
