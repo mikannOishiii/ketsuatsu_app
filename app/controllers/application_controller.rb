@@ -3,10 +3,6 @@ class ApplicationController < ActionController::Base
   # deviceのコントローラーのときに、下記のメソッドを呼ぶ
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def authenticate
-    redirect_to login_url unless user_signed_in?
-  end
-
   protected
 
   def configure_permitted_parameters
