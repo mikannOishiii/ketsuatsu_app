@@ -14,7 +14,7 @@
           <%= link_to "記入する", new_record_path, remote: true, id: "record-modal", data: {toggle: "modal", target: "#recordModal"} %>
         </li>
         <li>
-          <%= link_to "プリント", export_path %>
+          <%= link_to "プリント", root_path %>
         </li>
         <li class="drop-down"><a href=""><%= current_user.account_name %>さん</a>
           <ul>
@@ -28,4 +28,3 @@
 
   </div>
 </header><!-- End Header -->
-<%= render 'layouts/modal' %>
