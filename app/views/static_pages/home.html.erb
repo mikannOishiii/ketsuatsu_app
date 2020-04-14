@@ -1,7 +1,6 @@
 <% if user_signed_in? %>
   <%= render 'chart', records: @records %>
   <%= render 'table', records: @records %>
-  <div class="modal" id="recordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
 <% else %>
   <%= render 'welcome' %>
 <% end %>
