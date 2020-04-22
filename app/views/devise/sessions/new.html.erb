@@ -1,29 +1,33 @@
-<!-- ======= Login Section ======= -->
-<section id="login-section">
-  <div class="d-flex justify-content-center">
-    <div class="registration-form">
-      <%= form_for(resource, as: resource_name, url: login_path) do |f| %>
-        <div class="form-group">
-            <%= f.text_field :account_name, autocomplete: "account_name", class: "form-control item", placeholder: "アカウント名" %>
-        </div>
-        <div class="form-group">
-            <%= f.password_field :password, class: "form-control item", id: "password", placeholder: "Password",  autocomplete: "current-password" %>
-        </div>
-        <div class="form-group">
-          <%= f.submit "ログイン", class: "btn btn-block btn-blue" %>
-          <div class="checkbox">
-            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
-          </div>
-        </div>
-      <% end %>
-      <div class="social-media">
-        <h5>SNSでログインする</h5>
-        <div class="social-icons">
-          <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
-          <a href="#"><i class="icon-social-github" title="Github"></i></a>
-          <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
+<% provide(:title, "ログイン") %>
+<% provide(:h1, "ログイン") %>
+<%= render "devise/shared/signup_menu" %>
+<div class="col-md-12">
+  <%= form_for(resource, as: resource_name, url: login_path) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="form-group row">
+      <%= f.label :account_name, class: "col-4 col-form-label" %>
+      <div class="col-8">
+        <%= f.text_field :account_name, autocomplete: "account_name", class: "form-control item" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :password, class: "col-4 col-form-label" %>
+      <div class="col-8">
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control item" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-4 col-form-label">
+      </div>
+      <div class="col-8">
+        <div class="checkbox">
+          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
         </div>
       </div>
     </div>
-  </div>
-</section>
+    <%= f.submit "ログイン", class: "btn btn-block create-account" %>
+  <% end %>
+</div>
+<%= render 'devise/shared/account_footer' %>

@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   # deviceのコントローラーのときに、下記のメソッドを呼ぶ
   before_action :configure_permitted_parameters, if: :devise_controller?
 

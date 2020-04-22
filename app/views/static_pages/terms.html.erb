@@ -1,6 +1,7 @@
-<%= render "devise/registrations/signup_menu" %>
-<div class="terms_inner">
-  <h1 class="terms_title">利用規約</h1>
+<% provide(:title, "利用規約") %>
+<% provide(:h1, "利用規約") %>
+<%= render "devise/shared/signup_menu" %>
+<div class="container">
   <div class="terms_text">
     <li>この利用規約（以下，「本規約」といいます。）は、みかん太郎（以下，「当社」といいます。）がこのウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。</li>
   </div>
@@ -152,5 +153,5 @@
     </li>
     <p class="tR">以上</li>
   </ol>
-</div>
-<%= render "devise/registrations/account_footer" %>
+<div class="container">
+<%= render "devise/shared/account_footer" %>

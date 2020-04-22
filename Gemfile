@@ -22,7 +22,6 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'devise-i18n'
 gem 'chartkick'
-gem 'groupdate'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 

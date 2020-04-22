@@ -3,16 +3,76 @@
 
   <div class="container">
     <div class="row d-flex align-items-center">
-      <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1" data-aos="fade-right">
+      <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1 headline">
         <h1>かんたん血圧管理</h1>
-        <h2>高血圧予防に。グラフで血圧推移を可視化、PDF出力もできます。</h2>
+        <h2>高血圧予防に。グラフで血圧推移を可視化、CSV出力もできます。</h2>
           <%= link_to "今すぐはじめる", signup_path, class: "btn-get-started scrollto" %>
           <%= link_to "ログインはこちら", login_path, remote: :true, id: "login-modal", class: "btn-get-logined", data: {toggle: "modal", target: "#loginModal"} %>
       </div>
       <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
-        <%= image_tag "/assets/hero-img.png", class: "img-fluid" %>
+        <%= image_tag "/assets/hero_img.png", class: "img-fluid" %>
       </div>
     </div>
   </div>
 </section><!-- End Hero -->
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
+
+  <div class="container">
+    <div class="section-title">
+      <h2>Services</h2>
+      <p>血圧管理をかんたんサポート。毎日の血圧管理に役立つ便利な機能を利用できます。<br>
+        （画像はサンプル画像です。本アプリとは関係ありません。）</p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-stretch">
+        <div class="card">
+          <div class="card-img">
+            <%= image_tag "/assets/services_1.jpg" %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">記録する</h5>
+            <p class="card-text">画面から簡単な操作で朝晩の血圧数値やメモが残せます。もちろんモバイルやタブレットでも記録できます。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex align-items-stretch">
+        <div class="card">
+          <div class="card-img">
+            <%= image_tag "/assets/services_2.jpg" %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">傾向を知る</h5>
+            <p class="card-text">グラフによってあなたの血圧の傾向を知ることができます。目標を設定すると、達成度合いも分かります。（目標機能は現在開発中）</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6 d-flex align-items-stretch">
+        <div class="card">
+          <div class="card-img">
+            <%= image_tag "/assets/services_3.jpg" %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">紙で見る</h5>
+            <p class="card-text">先月分のデータをCSVに出力できるので、印刷することも可能です。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex align-items-stretch">
+        <div class="card">
+          <div class="card-img">
+            <%= image_tag "/assets/services_4.jpg" %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">サンプルです</h5>
+            <p class="card-text">このアプリはみかん太郎のサンプルアプリケーションです。データは予告なく破棄する可能性があります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section><!-- End Services Section -->
 <%= render 'devise/shared/login_form' %>

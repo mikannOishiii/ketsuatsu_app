@@ -1,4 +1,6 @@
-<%= render "account_menu", user: @user %>
+<% provide(:title, "プロフィール編集") %>
+<% provide(:h1, "プロフィール編集") %>
+<%= render "devise/shared/account_menu", user: @user %>
   <div class="col-md-12">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
@@ -41,4 +43,4 @@
         </div>
     <% end %>
   </div>
-<%= render "account_footer" %>
+<%= render "devise/shared/account_footer" %>

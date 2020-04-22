@@ -1,22 +1,27 @@
+<% provide(:title, "エクスポート") %>
 <!-- ======= Output Section ======= -->
 <section id="output-section" class="section-bg">
-  <div class="container d-flex justify-content-between">
-    <h2 class="section-title">Output</h2>
+  <div class='container d-flex'>
+    <h1 class="board-title">エクスポート</h2>
   </div>
   <div class='container'>
     <div class='row'>
-        <div class='col-12'>
-          <div class="content-area">
-            <div class="card-body">
-              <p>先月分のデータが出力できます。</p>
-              CSVの出力はこちら
-              <%= link_to "CSV", export_path(@records, format: :csv), class: "btn btn-primary" %>
-              PDFの出力はこちら
-              <%= link_to "PDF", export_path(@records, format: :pdf), class: "btn btn-primary" %>
-            </div>
+      <div class='col-12'>
+        <div class="content-area">
+          <div class="card-body">
+            <p>
+              先月分のデータが出力できます。CSVの出力は
+              <%= link_to "ここをクリック", export_path(@records, format: :csv) %>
+            </p>
           </div>
-          <%= render 'table', records: @records %>
+          <div class="profile-inner-text alert-danger">
+            <p>
+              当初はCSV機能を導入する予定でしたが、githubの容量オーバーになってしまったのでCSVに留めます。
+            </p>
+          </div>
         </div>
-     </div>
+      </div>
+    </div>
   </div>
 </section><!-- End Output Section -->
+<%= render 'table', records: @records %>
