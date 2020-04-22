@@ -1,4 +1,6 @@
-<%= render "account_menu", user: @user %>
+<% provide(:title, "設定変更") %>
+<% provide(:h1, "設定変更") %>
+<%= render "devise/shared/account_menu", user: @user %>
   <div class="col-md-12">
     <div class="profile-inner-text alert-danger">
       現在開発中です。少々お待ちください。
@@ -40,4 +42,4 @@
         </div>
     <% end %>
   </div>
-<%= render "account_footer" %>
+<%= render "devise/shared/account_footer" %>

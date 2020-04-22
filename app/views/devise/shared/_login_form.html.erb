@@ -2,7 +2,7 @@
   <!-- Modal -->
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div id="nameLogin" class="tab-pane active">
+      <div id="nameLogin" class="col-12">
         <% resource = User.new unless resource %>
         <%= form_for(resource, as: resource_name, url: login_path) do |f| %>
         <div class="form-group">
@@ -19,14 +19,21 @@
         </div>
         <% end %>
       </div>
-      <div id="snsLogin" class="tab-pane">
-        <div class="social-media">
-          <h5>SNSでログインする</h5>
-          <div class="social-icons">
-            <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
-            <a href="#"><i class="icon-social-github" title="Github"></i></a>
-            <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
-          </div>
+      <div id="snsLogin" class="col-12">
+        <div class="social-media text-center">
+          <h5>SNSログインはこちら</h5>
+          <ul class="social-network social-circle">
+            <li>
+              <%= link_to user_facebook_omniauth_authorize_path, class: "iconFacebook", title: "Facebook" do %>
+                <i class="fab fa-facebook-f"></i>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to user_twitter_omniauth_authorize_path, class: "iconTwitter", title: "Twitter" do %>
+                <i class="fab fa-twitter"></i>
+              <% end %>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

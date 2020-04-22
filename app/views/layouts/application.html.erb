@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>KetsuatsuApp</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,5 +13,6 @@
     <%= render 'layouts/header' %>
     <%= render 'layouts/error_message' %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

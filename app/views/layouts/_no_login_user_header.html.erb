@@ -1,42 +1,18 @@
-<!-- ======= Header ======= -->
-<header id="header" class="fixed-top">
-  <div class="container d-flex">
-
-    <div class="logo mr-auto">
-      <h1 class="text-light">
-        <%= link_to root_path do %>血圧管理<span>+plus</span><% end %>
-      </h1>
-    </div>
-
-    <nav class="nav-menu d-none d-lg-block">
-      <ul>
-        <li class="active"><%= link_to "Get Started", root_path %></li>
-        <li><%= link_to "About Us", root_path %></li>
-        <li><%= link_to "Service", root_path %></li>
-        <li><%= link_to "Portfolio", root_path %></li>
-        <li><%= link_to "Team", root_path %></li>
-        <li class="drop-down"><%= link_to "Drop Down" %>
-          <ul>
-            <li><%= link_to "Drop Down 1" %></li>
-            <li class="drop-down"><%= link_to "Drop Down 2" %>
-              <ul>
-                <li><%= link_to "Deep Drop Down 1" %></li>
-                <li><%= link_to "Deep Drop Down 2" %></li>
-                <li><%= link_to "Deep Drop Down 3" %></li>
-                <li><%= link_to "Deep Drop Down 4" %></li>
-                <li><%= link_to "Deep Drop Down 5" %></li>
-              </ul>
-            </li>
-            <li><%= link_to "Drop Down 3" %></li>
-            <li><%= link_to "Drop Down 4" %></li>
-            <li><%= link_to "Drop Down 5" %></li>
-          </ul>
-        </li>
-        <li><%= link_to "Contact Us", root_path %></li>
-
-        <li class="get-started"><%= link_to "Get Started", root_path %></li>
-      </ul>
-    </nav><!-- .nav-menu -->
-
-  </div>
-</header><!-- End Header -->
+<div class="collapse navbar-collapse nav-menu" id="headerMenu" >
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <%= link_to "このサイトについて", root_path, class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <% if current_page?(root_path) %>
+        <%= link_to "ログイン", login_path, remote: :true, id: "login-modal", class: "nav-link",
+            data: {toggle: "modal", target: "#loginModal"} %>
+      <% else %>
+        <%= link_to "ログイン", login_path, class: "nav-link" %>
+      <% end %>
+    </li>
+    <li class="nav-item get-started">
+      <%= link_to "アカウント登録", signup_path, class: "nav-link" %>
+    </li>
+  </ul>
+</div>

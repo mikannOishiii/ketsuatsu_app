@@ -1,4 +1,6 @@
-<%= render "signup_menu" %>
+<% provide(:title, "会員登録") %>
+<% provide(:h1, "会員登録") %>
+<%= render "devise/shared/signup_menu" %>
 <div class="col-md-12">
   <%= form_for(resource, as: resource_name, url: signup_path) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -46,5 +48,4 @@
     <%= f.submit "Create Account", class: "btn btn-block create-account" %>
   <% end %>
 </div>
-<%= render 'account_footer' %>
-<%= render 'devise/shared/login_form' %>
+<%= render 'devise/shared/account_footer' %>

@@ -2,62 +2,72 @@ class RecordsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @user = current_user
-    default_day = Time.now
-    if @user.records.exists?(date: default_day)
-      @record = @user.records.find_by(date: default_day)
+    if current_user.records.exists?(date: Time.now)
+      @record = current_user.records.find_by(date: Time.now)
     else
-      flash.now[:danger] = 'errored!'
-      @record = Record.new(date: default_day)
+      @record = Record.new(date: Time.now)
     end
   end
 
   def create
-    @record = Record.new(record_params)
+    @record = current_user.records.find_by(date: params[:record][:date])
     respond_to do |format|
-      if @record.save
-        format.html{ redirect_to root_url, notice: 'Record was successfully created.'}
-        format.json { render :show, status: :created, location: @record }
+      if @record.nil?
+        @record = Record.new(record_params)
+        if @record.save
+          format.html{ redirect_to root_url, notice: 'Record was successfully created.'}
+        else
+          format.js { render :edit }
+        end
       else
-        format.js { render :new }
-        format.json { render json: @record.errors, status: :unprocessable_entity }
+        if @record.update_attributes(record_params)
+          format.html { redirect_to root_url, notice: "Record was successfully updated" }
+        else
+          format.js { render :edit }
+        end
       end
     end
   end
 
   def update
-    @user = current_user
-    @record = @user.records.find_by(date: params[:record][:date])
+    @record = current_user.records.find_by(date: params[:record][:date])
     respond_to do |format|
-      if @record.update_attributes(record_params)
-        format.html { redirect_to root_url, notice: "Record was successfully updated" }
-        format.json { render :show, status: :created, location: @record }
+      if @record.nil?
+        @record = Record.new(record_params)
+        if @record.save
+          format.html{ redirect_to root_url, notice: 'Record was successfully created.'}
+        else
+          format.js { render :edit }
+        end
       else
-        format.js { render :new }
-        format.json { render json: @record.errors, status: :unprocessable_entity }
+        if @record.update_attributes(record_params)
+          format.html { redirect_to root_url, notice: "Record was successfully updated" }
+        else
+          format.js { render :edit }
+        end
       end
     end
   end
 
   def search
-    @user = current_user
-    @record = @user.records.find_by(date: params[:date])
-    if @record.nil?
-      @record = Record.new
-      render json: @record
-    else
-      render json: @record
+    @record = current_user.records.find_by(date: params[:date])
+    respond_to do |format|
+      if @record.nil?
+        @record = Record.new(date: params[:date])
+        format.json { render json: @record }
+      else
+        format.json { render json: @record }
+      end
     end
   end
 
   def date_range
-    @user = current_user
     if params[:date_range] == "current_month"
-      @records = @user.records.current_month
+      @records = current_user.records.current_month
     elsif params[:date_range] == "last_month"
-      @records = @user.records.last_month
+      @records = current_user.records.last_month
     elsif params[:date_range] == "last_week"
-      @records = @user.records.last_week
+      @records = current_user.records.last_week
     end
     respond_to do |format|
       format.html

@@ -3,14 +3,11 @@ class StaticPagesController < ApplicationController
 
   def home
     if user_signed_in?
-      @user = current_user
-      @records = @user.records.current_month
-      default_day = Time.now
-      if @user.records.exists?(date: default_day)
-        @record = @user.records.find_by(date: default_day)
+      @records = current_user.records.current_month.order(:date)
+      if current_user.records.exists?(date: params[:date])
+        @record = current_user.records.find_by(date: params[:date])
       else
-        flash.now[:danger] = 'errored!'
-        @record = Record.new(date: default_day)
+        @record = Record.new(date: params[:date])
       end
     end
   end
@@ -19,8 +16,7 @@ class StaticPagesController < ApplicationController
   end
 
   def export
-    @user = current_user
-    @records = @user.records.last_month
+    @records = current_user.records.last_month
 
     respond_to do |format|
       format.html
@@ -28,9 +24,9 @@ class StaticPagesController < ApplicationController
         export_data_csv(@records)
       end
       format.pdf do
-        render pdf: 'sample', #pdfファイルの名前。これがないとエラーが出ます
+        render pdf: 'sample', #pdfファイルの名前
                layout: 'pdf.html', #views/layouts
-               template: 'static_pages/export.html.erb', #テンプレートファイルの指定。viewsフォルダが読み込まれます。
+               template: 'static_pages/export.html.erb', #テンプレ指定
                encording: 'UTF-8'
       end
     end
