@@ -50,7 +50,7 @@ class StaticPagesController < ApplicationController
         csv << column_values
       end
     end
-    send_data(csv_data, filename: "export.csv")
+    send_data(csv_data, filename: "#{Time.zone.now.strftime('%Y%m%d')}.csv")
   end
 
   def select_date
