@@ -15,13 +15,13 @@ class RecordsController < ApplicationController
       if @record.nil?
         @record = Record.new(record_params)
         if @record.save
-          format.html{ redirect_to root_url, notice: 'Record was successfully created.'}
+          format.html{ redirect_to root_url, notice: "記録を作成しました。"}
         else
           format.js { render :edit }
         end
       else
         if @record.update_attributes(record_params)
-          format.html { redirect_to root_url, notice: "Record was successfully updated" }
+          format.html { redirect_to root_url, notice: "記録を更新しました。" }
         else
           format.js { render :edit }
         end
@@ -35,13 +35,13 @@ class RecordsController < ApplicationController
       if @record.nil?
         @record = Record.new(record_params)
         if @record.save
-          format.html{ redirect_to root_url, notice: 'Record was successfully created.'}
+          format.html{ redirect_to root_url, notice: "記録を作成しました。"}
         else
           format.js { render :edit }
         end
       else
         if @record.update_attributes(record_params)
-          format.html { redirect_to root_url, notice: "Record was successfully updated" }
+          format.html { redirect_to root_url, notice: "記録を更新しました。" }
         else
           format.js { render :edit }
         end

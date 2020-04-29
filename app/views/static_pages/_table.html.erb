@@ -5,13 +5,20 @@
   </div>
   <div class='container'>
     <div class='content-area'>
-      <table class='table table-hover daily-report'>
+      <table class='table table-hover table-bordered'>
         <thead class='thead-light'>
           <tr>
-            <th>年月日</th>
-            <th colspan='3' class='table-warning'>朝(最高：最低：脈拍)</th>
-            <th colspan='3' class='table-primary'>夜(最高：最低：脈拍)</th>
-            <th>メモ</th>
+            <th rowspan="2" class="text-center">年月日</th>
+            <th colspan="3" class="text-center">朝<i class="fas fa-cloud-sun"></i></th>
+            <th colspan="3" class="text-center">夜<i class="fas fa-moon"></i></th>
+            <th class="text-center">メモ</th>
+          </tr>
+          <tr>
+            <th colspan="2" class="text-center">血圧値[最高/最低](mmHg)</th>
+            <th class="text-center">脈拍/分</th>
+            <th colspan="2" class="text-center">血圧値[最高/最低](mmHg)</th>
+            <th class="text-center">脈拍/分</th>
+            <th class="text-center">※体調など</th>
           </tr>
         </thead>
         <tbody id="record_table">

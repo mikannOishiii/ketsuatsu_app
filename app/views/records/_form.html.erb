@@ -48,7 +48,7 @@
       </div>
       <div class="form-group">
         <%= f.label :memo, for: "inputMemo" %>
-        <%= f.text_area :memo, placeholder: "体の調子など", class: "form-control", id: "inputMemo", rows: "2", value: @record.memo %>
+        <%= f.text_field :memo, placeholder: "体の調子など", class: "form-control", id: "inputMemo", rows: "1", value: @record.memo %>
       </div>
       <div class="form-group">
         <%= f.submit "記録する", class: "btn btn-block btn-blue", id: "record-btn" %>
