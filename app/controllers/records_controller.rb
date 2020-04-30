@@ -17,13 +17,13 @@ class RecordsController < ApplicationController
         if @record.save
           format.html{ redirect_to root_url, notice: "記録を作成しました。"}
         else
-          format.js { render :edit }
+          format.js { render :new }
         end
       else
         if @record.update_attributes(record_params)
           format.html { redirect_to root_url, notice: "記録を更新しました。" }
         else
-          format.js { render :edit }
+          format.js { render :new }
         end
       end
     end
@@ -37,13 +37,13 @@ class RecordsController < ApplicationController
         if @record.save
           format.html{ redirect_to root_url, notice: "記録を作成しました。"}
         else
-          format.js { render :edit }
+          format.js { render :new }
         end
       else
         if @record.update_attributes(record_params)
           format.html { redirect_to root_url, notice: "記録を更新しました。" }
         else
-          format.js { render :edit }
+          format.js { render :new }
         end
       end
     end

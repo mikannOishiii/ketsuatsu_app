@@ -3,7 +3,8 @@ class Record < ApplicationRecord
 
   validates :user_id, presence: true
   validates :date, presence: true, uniqueness: true
-  validates :memo, length: { maximum: 25 }
+  validates :memo, length: { maximum: 20 }
+  validate :cannot_be_in_the_future
 
   with_options length: { maximum: 3 }, numericality: { only_integer: true }, allow_nil: true do
     validates :m_sbp
@@ -12,6 +13,10 @@ class Record < ApplicationRecord
     validates :n_sbp
     validates :n_dbp
     validates :n_pulse
+  end
+
+  def cannot_be_in_the_future
+    errors.add(:date, :cannot_be_future_date) if date.present? && date > Date.today
   end
 
   # scope :search_with_date, ->(date) { where("date = ?", date) }
@@ -27,7 +32,7 @@ class Record < ApplicationRecord
   #   where("date >= :start_date AND created_at <= :end_date",
   #   {start_date: params[:start_date], end_date: params[:end_date]})
   # }
-  # 
+  #
 
   # scope :search_dates, -> do
   #   if search_dates_params[:date] == 1
