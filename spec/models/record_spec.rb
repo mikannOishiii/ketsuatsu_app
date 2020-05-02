@@ -28,6 +28,11 @@ RSpec.describe Record, type: :model do
     expect(record).to be_valid
   end
 
+  it "数値に文字列が入っていると無効であること" do
+    record = build(:record, user: user, m_sbp: "str")
+    expect(record).not_to be_valid
+  end
+
   it "日付がないと無効であること" do
     record = build(:record, user: user, date: "")
     expect(record).not_to be_valid
@@ -43,13 +48,13 @@ RSpec.describe Record, type: :model do
     expect(record).not_to be_valid
   end
 
-  it "メモは25文字以内であること" do
-    record = build(:record, user: user, memo: "a" * 25)
+  it "メモは20文字以内であること" do
+    record = build(:record, user: user, memo: "a" * 20)
     expect(record).to be_valid
   end
 
-  it "メモは26文字以上だと無効であること" do
-    record = build(:record, user: user, memo: "a" * 26)
+  it "メモは21文字以上だと無効であること" do
+    record = build(:record, user: user, memo: "a" * 21)
     expect(record).not_to be_valid
   end
 end
