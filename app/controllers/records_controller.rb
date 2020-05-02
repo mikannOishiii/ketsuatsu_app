@@ -73,11 +73,11 @@ class RecordsController < ApplicationController
 
   def date_range
     if params[:date_range] == "current_month"
-      @records = current_user.records.current_month
+      @records = current_user.records.current_month.order(:date)
     elsif params[:date_range] == "last_month"
-      @records = current_user.records.last_month
+      @records = current_user.records.last_month.order(:date)
     elsif params[:date_range] == "last_week"
-      @records = current_user.records.last_week
+      @records = current_user.records.last_week.order(:date)
     end
     respond_to do |format|
       format.html
