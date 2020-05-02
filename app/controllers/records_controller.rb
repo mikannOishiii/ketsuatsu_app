@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!
+  protect_from_forgery except: :destroy # destroyアクションを除外
 
   def new
     if current_user.records.exists?(date: Time.now)
@@ -20,7 +21,7 @@ class RecordsController < ApplicationController
           format.js { render :new }
         end
       else
-        if @record.update_attributes(record_params)
+        if @record.update(record_params)
           format.html { redirect_to root_url, notice: "記録を更新しました。" }
         else
           format.js { render :new }
@@ -40,12 +41,21 @@ class RecordsController < ApplicationController
           format.js { render :new }
         end
       else
-        if @record.update_attributes(record_params)
+        if @record.update(record_params)
           format.html { redirect_to root_url, notice: "記録を更新しました。" }
         else
           format.js { render :new }
         end
       end
+    end
+  end
+
+  def destroy
+    @record = current_user.records.find(params[:id])
+    respond_to do |format|
+      @record.destroy
+      format.html { redirect_to root_url, notice: "記録を削除しました。"}
+      format.js
     end
   end
 

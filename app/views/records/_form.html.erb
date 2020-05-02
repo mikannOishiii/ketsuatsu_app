@@ -54,5 +54,12 @@
         <%= f.submit "記録する", class: "btn btn-block btn-blue", id: "record-btn" %>
       </div>
     <% end %>
+    <% if @record.id != nil %>
+      <%=link_to "削除する", @record, id: "destroy_form", class: "btn btn-gray",
+        method: :delete, data: { confirm: "本当に削除しますか？" } %>
+    <% else %>
+      <%=link_to "削除する", @record, id: "destroy_form", class: "btn btn-gray disabled",
+        method: :delete, data: { confirm: "本当に削除しますか？" }  %>
+    <% end %>
   </div>
 </div>

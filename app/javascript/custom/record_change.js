@@ -16,6 +16,13 @@ $.ajax({ //ajax通信で以下のことを行います
     $("#inputN_DBP").val(data.n_dbp);
     $("#inputN_PLS").val(data.n_pulse);
     $("#inputMemo").val(data.memo);
+    $("#destroy_form").attr("action", `/records/${data.id}`);
+    $("#destroy_form").attr("href", `/records/${data.id}`);
+    if(data.id == null){
+      $("#destroy_form").addClass('disabled');
+    } else {
+      $("#destroy_form").removeClass('disabled');
+    }
     if(inputDate == "") {
       $("#record-btn").addClass('inactive');
       $("#record-btn").attr('disabled', true);

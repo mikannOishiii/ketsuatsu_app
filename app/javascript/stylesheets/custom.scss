@@ -137,6 +137,21 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.btn-gray {
+  border-radius: 30px;
+  margin: 0 30px 25px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #ccc;
+  border: none;
+  color: $color-white;
+  &:hover {
+    background-color: #999;
+    color: $color-white;
+  }
+}
+
 /*--------------------------------------------------------------
 # Services
 --------------------------------------------------------------*/
@@ -665,7 +680,7 @@ ul.social-network {
   border-radius: 30px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
   form {
-    margin: 50px 30px 25px;
+    margin: 50px 30px 0px;
     .login_title {
       font-size: 24px;
       text-align: center;
