@@ -71,18 +71,18 @@ RSpec.describe "Records", type: :request do
       end
 
       it "リクエストに成功すること" do
-        post records_url, params: { record: attributes_for(:record, :invalid) }
+        post records_url, params: { record: attributes_for(:record, :invalid), format: :js }
         expect(response.status).to eq 200
       end
 
       it "recordが登録されないこと" do
         expect do
-          post records_url, params: { record: attributes_for(:record, :invalid) }
+          post records_url, params: { record: attributes_for(:record, :invalid), format: :js }
         end.to_not change(Record, :count)
       end
 
       it "エラーが表示されること" do
-        post records_url, params: { record: attributes_for(:record, :invalid) }
+        post records_url, params: { record: attributes_for(:record, :invalid), format: :js }
         expect(response.body).to include "朝の最高血圧は数値で入力してください"
       end
     end
@@ -91,10 +91,10 @@ RSpec.describe "Records", type: :request do
   describe 'PUT #update' do
     let(:user) { create(:user) }
     let!(:record) { create(:record, user: user) }
-    let(:update_attributes) do
+    let!(:update_attributes) do
       { date: record.date, m_sbp: 100, m_dbp: 100 }
     end
-    let(:update_attributes_invalid) do
+    let!(:update_attributes_invalid) do
       { date: record.date, m_sbp: "str", m_dbp: 100 }
     end
 
@@ -124,19 +124,44 @@ RSpec.describe "Records", type: :request do
       end
 
       it "リクエストに成功すること" do
-        put record_url record, params: { date: record.date, record: update_attributes_invalid }, session: {}
+        put record_url record, params: { date: record.date, record: update_attributes_invalid, format: :js }, session: {}
         expect(response.status).to eq 200
       end
 
       it "recordが更新されないこと" do
         expect do
-          put record_url record, params: { id: record.id, record: update_attributes_invalid }, session: {}
+          put record_url record, params: { id: record.id, record: update_attributes_invalid, format: :js }, session: {}
         end.to_not change { Record.find(record.id).m_sbp }
       end
       it "エラーが表示されること" do
-        put record_url record, params: { date: record.date, record: update_attributes_invalid }, session: {}
+        put record_url record, params: { date: record.date, record: update_attributes_invalid, format: :js }, session: {}
         expect(response.body).to include "朝の最高血圧は数値で入力してください"
       end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    let(:user) { create(:user) }
+    let!(:record) { create(:record, user: user) }
+
+    before do
+      sign_in user
+    end
+
+    it "リクエストが成功すること" do
+      delete record_url record
+      expect(response.status).to eq 302
+    end
+
+    it "記録が削除されること" do
+      expect do
+        delete record_url record
+      end.to change(Record, :count).by(-1)
+    end
+
+    it "リダイレクトされること" do
+      delete record_url record
+      expect(response).to redirect_to root_url
     end
   end
 end

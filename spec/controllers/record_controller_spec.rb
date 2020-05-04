@@ -73,8 +73,23 @@ RSpec.describe RecordsController, type: :controller do
 
     it 'updates updated record' do
       patch :update, params: { id: record.id, record: update_attributes }, session: {}
-      expect(record.m_sbp).to eq update_attributes[:m_sbp]
-      expect(record.m_dbp).to eq update_attributes[:m_dbp]
+      expect(record.reload.m_sbp).to eq update_attributes[:m_sbp]
+      expect(record.reload.m_dbp).to eq update_attributes[:m_dbp]
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    let(:user) { create(:user) }
+    let!(:record) { create(:record, user: user) }
+
+    before do
+      sign_in user
+    end
+
+    it '記録を削除できる' do
+      expect do
+        delete :destroy, params: { id: record.id }
+      end.to change(Record, :count).by(-1)
     end
   end
 end
