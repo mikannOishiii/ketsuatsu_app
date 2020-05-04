@@ -4,11 +4,6 @@ class StaticPagesController < ApplicationController
   def home
     if user_signed_in?
       @records = current_user.records.current_month.order(:date)
-      if current_user.records.exists?(date: params[:date])
-        @record = current_user.records.find_by(date: params[:date])
-      else
-        @record = Record.new(date: params[:date])
-      end
     end
   end
 

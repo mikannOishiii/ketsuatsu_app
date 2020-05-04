@@ -23,10 +23,6 @@ RSpec.describe StaticPagesController, type: :controller do
         expect(response).to render_template :home
       end
 
-      it "@recordが取得できていること" do
-        expect(assigns(:record)).to eq record_today
-      end
-
       it "@recordsが取得できていること" do
         expect(assigns(:records)).to eq records
         expect(assigns(:records)).not_to include record_lastmonth
