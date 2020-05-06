@@ -1,6 +1,6 @@
 require "csv"
 
-User.create!(account_name:  "TestUser",
+User.create!(account_name:  "testuser",
              email: "test@example.com",
              password:              "foobar",
              password_confirmation: "foobar",
