@@ -4,6 +4,9 @@
 <div class="col-md-12">
   <%= form_for(resource, as: resource_name, url: login_path) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="demo-alert alert-danger">
+      <p>【採用担当者の方へ】デモアカウントでもログインできます。<br><b>testuser</b> / <b>foobar</b></p>
+    </div>
     <div class="form-group row">
       <%= f.label :account_name, class: "col-4 col-form-label" %>
       <div class="col-8">
