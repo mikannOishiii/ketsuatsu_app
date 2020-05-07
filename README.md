@@ -13,7 +13,7 @@ This app is my sample application made to learn web programming and prevent my m
 # Table of contents
 * [DEMO](#DEMO)
 * [Features](#Features)
-* [Environment](#feature)
+* [Environment](#Environment)
 * [Note](#Note)
 * [License](#License)
 
