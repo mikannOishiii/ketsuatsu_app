@@ -15,6 +15,7 @@ This app is my sample application made to learn web programming and prevent my m
 * [Features](#Features)
 * [Environment](#Environment)
 * [Note](#Note)
+* [Author](#Author)
 * [License](#License)
 
 # DEMO
