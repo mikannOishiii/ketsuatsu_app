@@ -5,7 +5,7 @@
 
 # ketsuatsu plus / けつあつplus
 This tool enables you to record your daily blood pressure easily.  
-This app is my sample application made to learn web programming and prevent hypertension in my mother.  
+This app is my sample application made to learn web programming and prevent my mother's hypertension.  
 
 毎日の血圧を簡単に記録することができるツールです。  
 このアプリケーションは、私がwebプログラミングを学習するために、また、母の高血圧を予防するために作りました。  
@@ -22,7 +22,7 @@ This app is my sample application made to learn web programming and prevent hype
 ![sample-app](https://user-images.githubusercontent.com/46390084/81194677-e632bb80-8ff7-11ea-87a9-9c88d353f7c0.gif)   
 
 
-**You can log in with a demo account.**  
+**You can log in with the demo account.**  
 **デモ用のアカウントでログインできます。**  
 [**GO TO WEBSITE**](https://mikanntaroh-ketsuatsu.herokuapp.com/)  
 account_name => `testuser` password => `foobar`  
@@ -30,7 +30,7 @@ account_name => `testuser` password => `foobar`
 You can record your blood pressure (systolic / diastolic) and pulse every morning and night.  
 毎朝、毎夜の血圧値（最高値/最低値）および脈拍を記録することができます。  
 
-You can check the trend of data in a graph or table.  
+You can check the trend of your data in a graph or a table.  
 データの傾向をはグラフまたはテーブルで確認することができます。  
 
 # Features
@@ -72,7 +72,7 @@ yarn Node.js
 
 
 # Note
-Do not change the demo account name and password.  
+Do not change the name and the password of the demo account.  
 デモ用のアカウント名やパスワードを変えないでください。  
 
 # Author
