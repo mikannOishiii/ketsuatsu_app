@@ -26,7 +26,8 @@ This app is my sample application made to learn web programming and prevent my m
 **You can log in with the demo account.**  
 **デモ用のアカウントでログインできます。**  
 [**GO TO WEBSITE**](https://mikanntaroh-ketsuatsu.herokuapp.com/)  
-account_name => `testuser` password => `foobar`  
+* account_name => `testuser`
+* password => `foobar`  
 
 You can record your blood pressure (systolic / diastolic) and pulse every morning and night.  
 毎朝、毎夜の血圧値（最高値/最低値）および脈拍を記録することができます。  
@@ -55,7 +56,11 @@ The design uses the Bootstrap template.
 #### HostOS
 MacOS
 #### Languages
-HTML CSS JavaScript Ruby(2.6.5) SQL
+* HTML
+* CSS
+* JavaScript
+* Ruby(2.6.5)
+* SQL
 #### main framework
 Ruby on Rails(6.0.2)
 #### CSS framework
@@ -69,7 +74,8 @@ heroku
 #### Testing framework
 RSpec
 #### Other
-yarn Node.js
+* yarn
+* Node.js
 
 
 # Note
