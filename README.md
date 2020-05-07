@@ -53,7 +53,7 @@ The design uses the Bootstrap template.
 
 
 # Environment
-#### HostOS
+#### Development Environment
 MacOS
 #### Languages
 * HTML
