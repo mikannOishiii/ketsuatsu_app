@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse nav-menu" id="headerMenu" >
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <%= link_to "このサイトについて", root_path, class: "nav-link" %>
+      <%= link_to "このサイトについて", root_path(anchor: "services"), class: "nav-link" %>
     </li>
     <li class="nav-item">
       <% if current_page?(root_path) %>
