@@ -2,7 +2,7 @@ class Record < ApplicationRecord
   belongs_to :user
 
   validates :user_id, presence: true
-  validates :date, presence: true, uniqueness: true
+  validates :date, presence: true
   validates :memo, length: { maximum: 20 }
   validate :cannot_be_in_the_future
 

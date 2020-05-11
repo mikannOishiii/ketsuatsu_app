@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Record, type: :model do
   let(:user){ create(:user) }
+  let(:other_user){ create(:user) }
 
   it "紐づくアカウントがあれば有効であること" do
     record = build(:record, user: user)
@@ -38,11 +39,6 @@ RSpec.describe Record, type: :model do
     expect(record).not_to be_valid
   end
 
-  it "日付が重複していると無効であること" do
-    record = build(:record, user: user, date: "")
-    expect(record).not_to be_valid
-  end
-
   it "日付が未来だと無効であること" do
     record = build(:record, user: user, date: Time.current.tomorrow)
     expect(record).not_to be_valid
@@ -56,5 +52,11 @@ RSpec.describe Record, type: :model do
   it "メモは21文字以上だと無効であること" do
     record = build(:record, user: user, memo: "a" * 21)
     expect(record).not_to be_valid
+  end
+
+  it "ユーザー同士で日付が重複していても有効であること" do
+    record1 = create(:record, user: other_user)
+    record2 = build(:record, user: user)
+    expect(record2).to be_valid
   end
 end
