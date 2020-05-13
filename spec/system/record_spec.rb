@@ -31,7 +31,7 @@ RSpec.feature "Record", type: :system do
   scenario "新しいデータの登録に成功して、編集に成功する、削除に成功する", js: true do
     visit root_path
     click_on "記入する"
-    wait_for_ajax 
+    wait_for_ajax
     fill_in "inputM_SBP", with: 150
     click_on "記録する"
     wait_for_ajax do
