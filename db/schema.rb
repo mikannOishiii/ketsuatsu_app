@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_04_04_011344) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "records", force: :cascade do |t|
     t.date "date"
     t.integer "m_sbp"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_011344) do
     t.integer "n_dbp"
     t.integer "n_pulse"
     t.text "memo"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "created_at"], name: "index_records_on_user_id_and_created_at"
