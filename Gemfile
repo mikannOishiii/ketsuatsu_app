@@ -19,6 +19,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'pg'
 gem 'devise'
 gem 'devise-i18n'
 gem 'chartkick'
@@ -32,7 +33,6 @@ gem 'omniauth-twitter'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.4'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '4.0.0.beta4'
   gem 'factory_bot_rails'
@@ -51,12 +51,9 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'webdrivers'
+  gem 'selenium-webdriver'
   gem 'launchy'
   gem 'rails-controller-testing'
-end
-group :production do
-  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
