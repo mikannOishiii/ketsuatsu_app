@@ -1,0 +1,40 @@
+FROM ruby:2.6.5
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+RUN apt-get update -qq && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    nodejs \
+    yarn \
+    wget \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
+
+ENV ENTRYKIT_VERSION 0.4.0
+
+RUN wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
+&& tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
+&& rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
+&& mv entrykit /bin/entrykit \
+&& chmod +x /bin/entrykit \
+&& entrykit --symlink
+
+# 作業ディレクトリの作成、設定
+RUN mkdir /ketsuatsu_app
+WORKDIR /ketsuatsu_app
+
+# ローカルのGemfileを追加
+COPY Gemfile /ketsuatsu_app/Gemfile
+COPY Gemfile.lock /ketsuatsu_app/Gemfile.lock
+ENV BUNDLER_VERSION 2.1.2
+RUN gem install bundler -v $BUNDLER_VERSION
+RUN bundle install --no-deployment
+COPY . /ketsuatsu_app
+
+ENTRYPOINT [ \
+  "prehook", "bundle install -j3 --path vendor/bundle", "--", \
+  "prehook", "ruby -v", "--", \
+  "prehook", "node -v", "--" \
+]

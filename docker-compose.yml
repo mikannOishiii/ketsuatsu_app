@@ -1,0 +1,31 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+  web: &app_base
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/ketsuatsu_app:cached
+      # exclude volumes
+      - /ketsuatsu_app/tmp
+      - /ketsuatsu_app/log
+      - /ketsuatsu_app/.git
+      - /ketsuatsu_app/vendor/bundle
+      - /ketsuatsu_app/vendor/assets
+      - /ketsuatsu_app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+volumes:
+  postgresql-data:
+    driver: local
