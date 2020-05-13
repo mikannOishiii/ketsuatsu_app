@@ -88,7 +88,7 @@ RSpec.feature "Record", type: :system do
     end
   end
 
-  scenario "期間切替に成功する" do
+  scenario "期間切替に成功する", js: true do
     record_today = create(:record, user: user, date: Time.now)
     # 今月のデータが登録されている
     visit root_path
@@ -98,14 +98,14 @@ RSpec.feature "Record", type: :system do
     end
     # 先月のデータが登録されている
     select "先月", from: "date_range"
-    click_on "切替"
+    click_button "切替"
     within "#record_table" do
       expect(page).to have_content record_lastmonth.date
       expect(page).not_to have_content record_today.date
     end
     # 1週間前までのデータが登録されている
     select "直近一週間", from: "date_range"
-    click_on "切替"
+    click_button "切替"
     within "#record_table" do
       expect(page).to have_content record_yesterday.date
       expect(page).to have_content record_lastweek.date
