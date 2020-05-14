@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe RecordsController, type: :controller do
-
   describe 'GET #new' do
     let(:user1) { create(:user) }
     let(:user2) { create(:user) }

@@ -31,38 +31,27 @@ RSpec.feature "Record", type: :system do
   scenario "新しいデータの登録に成功して、編集に成功する、削除に成功する", js: true do
     visit root_path
     click_on "記入する"
-    wait_for_ajax
     fill_in "inputM_SBP", with: 150
     click_on "記録する"
-    wait_for_ajax do
-      expect(current_path).to eq root_path
-      expect(page).to have_content "記録を作成しました。"
-    end
+    expect(current_path).to eq root_path
+    expect(page).to have_content "記録を作成しました。"
     click_on "記入する"
-    wait_for_ajax do
-      expect(page).to have_content "150"
-    end
+    expect(page).to have_content "150"
     fill_in "inputM_SBP", with: 160
     click_on "記録する"
-    wait_for_ajax do
-      expect(current_path).to eq root_path
-      expect(page).to have_content "記録を更新しました。"
-      expect(page).to have_content Time.now.strftime("%Y-%m-%d")
-      expect(page).to have_content "160"
-    end
+    expect(current_path).to eq root_path
+    expect(page).to have_content "記録を更新しました。"
+    expect(page).to have_content Time.now.strftime("%Y-%m-%d")
+    expect(page).to have_content "160"
     click_on "記入する"
-    wait_for_ajax do
-      expect(page).to have_content "160"
-    end
+    expect(page).to have_content "160"
     page.accept_confirm do
       click_on "削除する"
     end
-    wait_for_ajax do
-      expect(current_path).to eq root_path
-      expect(page).to have_content "記録を削除しました。"
-      expect(page).not_to have_content Time.now.strftime("%Y-%m-%d")
-      expect(page).not_to have_content "160"
-    end
+    expect(current_path).to eq root_path
+    expect(page).to have_content "記録を削除しました。"
+    expect(page).not_to have_content Time.now.strftime("%Y-%m-%d")
+    expect(page).not_to have_content "160"
   end
 
   scenario "日付を変更して、データを更新する、データを削除する", js: true do
@@ -72,20 +61,16 @@ RSpec.feature "Record", type: :system do
     expect(page).to have_content record_yesterday.m_sbp
     fill_in "inputM_SBP", with: 155
     click_on "記録する"
-    wait_for_ajax do
-      expect(current_path).to eq root_path
-      expect(page).to have_content "記録を更新しました。"
-    end
+    expect(current_path).to eq root_path
+    expect(page).to have_content "記録を更新しました。"
     click_on "記入する"
     fill_in "inputDate", with: Time.now.yesterday
     expect(page).to have_content "155"
     page.accept_confirm do
       click_on "削除する"
     end
-    wait_for_ajax do
-      expect(current_path).to eq root_path
-      expect(page).to have_content "記録を削除しました。"
-    end
+    expect(current_path).to eq root_path
+    expect(page).to have_content "記録を削除しました。"
   end
 
   scenario "期間切替に成功する", js: true do

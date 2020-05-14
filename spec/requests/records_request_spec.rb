@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Records", type: :request do
-
   describe 'GET #new' do
     let(:user1) { create(:user) }
     let(:user2) { create(:user) }
@@ -78,7 +77,7 @@ RSpec.describe "Records", type: :request do
       it "recordが登録されないこと" do
         expect do
           post records_url, params: { record: attributes_for(:record, :invalid), format: :js }
-        end.to_not change(Record, :count)
+        end.not_to change(Record, :count)
       end
 
       it "エラーが表示されること" do
@@ -131,7 +130,7 @@ RSpec.describe "Records", type: :request do
       it "recordが更新されないこと" do
         expect do
           put record_url record, params: { id: record.id, record: update_attributes_invalid, format: :js }, session: {}
-        end.to_not change { Record.find(record.id).m_sbp }
+        end.not_to change { Record.find(record.id).m_sbp }
       end
       it "エラーが表示されること" do
         put record_url record, params: { date: record.date, record: update_attributes_invalid, format: :js }, session: {}
