@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Registrations", type: :feature do
-  let(:user) { build(:user, account_name: "test",
-                            email: "test@example.org",
-                            password: "abcdefg",
-                            password_confirmation: "abcdefg") }
+  let(:user) { build(:user) }
+
   before do
     visit signup_path
   end
@@ -22,7 +20,7 @@ RSpec.feature "Registrations", type: :feature do
   end
 
   scenario "ユーザー登録に成功する" do
-    expect {
+    expect do
       within ".registration-form" do
         fill_in "user_account_name", with: user.account_name
         fill_in "user_email", with: user.email
@@ -33,6 +31,6 @@ RSpec.feature "Registrations", type: :feature do
       end
       expect(page).to have_content "アカウント登録が完了しました。"
       expect(current_path).to eq root_path
-    }.to change(User, :count).to(1)
+    end.to change(User, :count).to(1)
   end
 end

@@ -24,13 +24,13 @@ RSpec.describe User, type: :model do
   end
 
   it "passwordが5文字以内だと無効であること" do
-    user = build(:user, password: "a" * 5)
+    user = build(:user, password: "a" * 5, password_confirmation: "a" * 5)
     user.valid?
     expect(user.errors[:password]).to include("6文字以上で入力してください")
   end
 
   it "passwordが6文字以上だと有効であること" do
-    user = build(:user, password: "a" * 6)
+    user = build(:user, password: "a" * 6, password_confirmation: "a" * 6)
     user.valid?
     expect(user).to be_valid
   end
@@ -57,6 +57,6 @@ RSpec.describe User, type: :model do
   it "userを削除すると、紐づくrecordも削除されること" do
     user = create(:user)
     user.records.create!(date: Date.today, m_sbp: 132, m_dbp: 84, m_pulse: 64)
-    expect { user.destroy }.to change { Record.count }.by(-1)
+    expect { user.destroy }.to change(Record, :count).by(-1)
   end
 end
