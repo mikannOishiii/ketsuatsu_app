@@ -15,9 +15,9 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def full_title(page_title= "")
+  def full_title(page_title)
     base_title = "けつあつplus"
-    if page_title.empty?
+    if page_title.blank?
       base_title
     else
       page_title + " | " + base_title
