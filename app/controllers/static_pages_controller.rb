@@ -19,9 +19,9 @@ class StaticPagesController < ApplicationController
         export_data_csv(@records)
       end
       format.pdf do
-        render pdf: 'sample', #pdfファイルの名前
-               layout: 'pdf.html', #views/layouts
-               template: 'static_pages/export.html.erb', #テンプレ指定
+        render pdf: 'sample', # pdfファイルの名前
+               layout: 'pdf.html', # views/layouts
+               template: 'static_pages/export.html.erb', # テンプレ指定
                encording: 'UTF-8'
       end
     end
@@ -40,7 +40,7 @@ class StaticPagesController < ApplicationController
           record.n_sbp,
           record.n_dbp,
           record.n_pulse,
-          record.memo
+          record.memo,
         ]
         csv << column_values
       end

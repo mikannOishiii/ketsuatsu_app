@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe StaticPagesController, type: :controller do
-
-
   describe "GET #home" do
     let(:user) { create(:user) }
     let!(:record_today) { create(:record, user: user) }
     let!(:record_lastmonth) { create(:record, user: user, date: Time.now.ago(31.days)) }
-    let!(:records){ user.records.current_month }
+    let!(:records) { user.records.current_month }
 
     context "ログインしていて, 今日のデータが存在する場合" do
       before do
@@ -50,7 +48,7 @@ RSpec.describe StaticPagesController, type: :controller do
   describe "GET #export" do
     let(:user) { create(:user) }
     let!(:record_lastmonth) { create(:record, user: user, date: Time.now.ago(31.days)) }
-    let!(:records_lastmonth){ user.records.last_month }
+    let!(:records_lastmonth) { user.records.last_month }
 
     context "ログインしていない場合" do
       before do

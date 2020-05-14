@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Record, type: :model do
-  let(:user){ create(:user) }
-  let(:other_user){ create(:user) }
+  let(:user) { create(:user) }
 
   it "紐づくアカウントがあれば有効であること" do
     record = build(:record, user: user)
@@ -25,7 +24,7 @@ RSpec.describe Record, type: :model do
   end
 
   it "数値が空でも有効であること" do
-    record = build(:record, user: user)
+    record = build(:record, user: user, m_sbp: "")
     expect(record).to be_valid
   end
 
@@ -55,8 +54,10 @@ RSpec.describe Record, type: :model do
   end
 
   it "ユーザー同士で日付が重複していても有効であること" do
-    record1 = create(:record, user: other_user)
-    record2 = build(:record, user: user)
-    expect(record2).to be_valid
+    other_user = create(:user, account_name: "otheruser")
+    other_user_record = create(:record, user: other_user)
+    user_record = build(:record, user: user)
+    expect(user_record).to be_valid
+    expect(other_user_record).to be_valid
   end
 end

@@ -9,6 +9,15 @@ Rails:
 LineLength:
   Max: 130
 
+# devise
+Airbnb/ClassOrModuleDeclaredInWrongFile:
+  Exclude:
+    - 'app/controllers/Users/*'
+
+Rails/HelperInstanceVariable:
+  Exclude:
+    - 'app/helpers/application_helper.rb'
+
 AllCops:
   Exclude:
     - 'db/**/*'
