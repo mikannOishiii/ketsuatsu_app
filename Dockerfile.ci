@@ -1,0 +1,39 @@
+FROM ruby:2.6.5-alpine3.11
+
+RUN apk --update --no-cache add --virtual .chrome_packages \
+  chromium \
+  chromium-chromedriver \
+  dbus \
+  mesa-dri-swrast \
+  ttf-freefont \
+  udev \
+  wait4ports \
+  xorg-server \
+  xvfb \
+  zlib-dev
+
+RUN apk --update --no-cache add --virtual .runtime_packages \
+  nodejs \
+  postgresql \
+  postgresql-dev \
+  tzdata
+
+RUN apk --update --no-cache  add --virtual .dev_packages \
+  build-base \
+  curl-dev \
+  gcc \
+  libc-dev \
+  libxml2-dev \
+  linux-headers \
+  make
+
+# 作業ディレクトリの作成、設定
+RUN mkdir /ketsuatsu_app
+WORKDIR /ketsuatsu_app
+COPY . /ketsuatsu_app
+
+# bundle install & 不要なファイル削除
+RUN gem install bundler --version 2.1.2 \
+  && bundle install --without development test --path vendor/bundle \
+  && find vendor/bundle/ruby -path '*/gems/*/ext/*/Makefile' -exec dirname {} \; | xargs -n1 -P$(nproc) -I{} make -C {} clean \
+  && apk del .dev_packages
