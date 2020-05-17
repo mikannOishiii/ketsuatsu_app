@@ -1,39 +1,36 @@
-FROM ruby:2.6.5-alpine3.11
+# Node.js & Yarn
+FROM node:10.15.1-alpine as node
 
-RUN apk --update --no-cache add --virtual .chrome_packages \
-  chromium \
-  chromium-chromedriver \
-  dbus \
-  mesa-dri-swrast \
-  ttf-freefont \
-  udev \
-  wait4ports \
-  xorg-server \
-  xvfb \
-  zlib-dev
+RUN apk add --no-cache --virtual .ruby-builddeps bash curl \
+  && curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.22.4 \
+  && apk del .ruby-builddeps
 
-RUN apk --update --no-cache add --virtual .runtime_packages \
-  nodejs \
-  postgresql \
-  postgresql-dev \
-  tzdata
+# Ruby & Bundler & postgresql-client
+FROM ruby:2.6.5-alpine
 
-RUN apk --update --no-cache  add --virtual .dev_packages \
-  build-base \
-  curl-dev \
-  gcc \
-  libc-dev \
-  libxml2-dev \
-  linux-headers \
-  make
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /opt/yarn-* /opt/yarn
+RUN ln -fs /opt/yarn/bin/yarn /usr/local/bin/yarn
+
+ENV RUN_PACKAGES="nodejs postgresql postgresql-dev tzdata" \
+    DEV_PACKAGES="build-base curl-dev gcc libc-dev libxml2-dev linux-headers make" \
+    CHROME_PACKAGES="chromium chromium-chromedriver dbus mesa-dri-swrast ttf-freefont udev wait4ports xorg-server xvfb zlib-dev"
+
+RUN apk --update --no-cache add ${RUN_PACKAGES} \
+  && apk --update --no-cache add ${DEV_PACKAGES} \
+  && apk --update --no-cache add ${CHROME_PACKAGES} \
+  && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+  && apk del --purge tzdata
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /ketsuatsu_app
 WORKDIR /ketsuatsu_app
-COPY . /ketsuatsu_app
 
-# bundle install & 不要なファイル削除
+# bundle install & Delete Unnecessary Packages_and_Cache & Copy File
+COPY Gemfile /ketsuatsu_app/Gemfile
+COPY Gemfile.lock /ketsuatsu_app/Gemfile.lock
 RUN gem install bundler --version 2.1.2 \
-  && bundle install --without development test --path vendor/bundle \
+  && bundle install --path vendor/bundle \
   && find vendor/bundle/ruby -path '*/gems/*/ext/*/Makefile' -exec dirname {} \; | xargs -n1 -P$(nproc) -I{} make -C {} clean \
-  && apk del .dev_packages
+  && apk del ${DEV_PACKAGES}
+COPY . /ketsuatsu_app

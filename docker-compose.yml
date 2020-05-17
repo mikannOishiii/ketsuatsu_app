@@ -1,31 +1,34 @@
 version: '3'
 services:
   db:
-    image: postgres
-    volumes:
-      - postgresql-data:/var/lib/postgresql/data
+    image: postgres:11.4-alpine
     environment:
       POSTGRES_PASSWORD: postgres
-  web: &app_base
+      TZ: Asia/Tokyo
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+  web:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    tty: true
-    stdin_open: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
     volumes:
       - .:/ketsuatsu_app:cached
       # exclude volumes
       - /ketsuatsu_app/tmp
       - /ketsuatsu_app/log
       - /ketsuatsu_app/.git
-      - /ketsuatsu_app/vendor/bundle
-      - /ketsuatsu_app/vendor/assets
-      - /ketsuatsu_app/node_modules
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
+      - vendor_bundle:/ketsuatsu_app/vendor/bundle
+      - vendor_assets:/ketsuatsu_app/vendor/assets
+      - node_modules:/ketsuatsu_app/node_modules
+    tty: true
+    stdin_open: true
+    command: ash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
 volumes:
-  postgresql-data:
-    driver: local
+  pg-data:
+  vendor_bundle:
+  vendor_assets:
+  node_modules:
