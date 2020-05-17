@@ -16,7 +16,7 @@ class RecordsController < ApplicationController
       if @record.nil?
         @record = Record.new(record_params)
         if @record.save
-          format.html{ redirect_to root_url, notice: "記録を作成しました。"}
+          format.html { redirect_to root_url, notice: "記録を作成しました。" }
         else
           format.js { render :new }
         end
@@ -36,7 +36,7 @@ class RecordsController < ApplicationController
       if @record.nil?
         @record = Record.new(record_params)
         if @record.save
-          format.html{ redirect_to root_url, notice: "記録を作成しました。"}
+          format.html { redirect_to root_url, notice: "記録を作成しました。" }
         else
           format.js { render :new }
         end
@@ -54,7 +54,7 @@ class RecordsController < ApplicationController
     @record = current_user.records.find(params[:id])
     respond_to do |format|
       @record.destroy
-      format.html { redirect_to root_url, notice: "記録を削除しました。"}
+      format.html { redirect_to root_url, notice: "記録を削除しました。" }
       format.js
     end
   end
@@ -88,8 +88,8 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record).permit(:date, :m_sbp, :m_dbp, :m_pulse,
-                                   :n_sbp, :n_dbp, :n_pulse, :memo,)
-                           .merge(user_id: current_user.id)
+    params.require(:record).
+      permit(:date, :m_sbp, :m_dbp, :m_pulse, :n_sbp, :n_dbp, :n_pulse, :memo,).
+      merge(user_id: current_user.id)
   end
 end

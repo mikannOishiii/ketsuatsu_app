@@ -16,7 +16,9 @@ class Record < ApplicationRecord
   end
 
   def cannot_be_in_the_future
-    errors.add(:date, :cannot_be_future_date) if date.present? && date > Date.today
+    if date.present? && date > Date.today
+      errors.add(:date, :cannot_be_future_date)
+    end
   end
 
   # 今月
