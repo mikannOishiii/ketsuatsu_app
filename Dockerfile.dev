@@ -1,49 +1,48 @@
-FROM ruby:2.6.5
+# Node.js & Yarn
+FROM node:10.15.1-alpine as node
+
+RUN apk add --no-cache --virtual .ruby-builddeps bash curl \
+  && curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.22.4 \
+  && apk del .ruby-builddeps
+
+# Ruby & Bundler & postgresql-client
+FROM ruby:2.6.5-alpine
+
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /opt/yarn-* /opt/yarn
+RUN ln -fs /opt/yarn/bin/yarn /usr/local/bin/yarn
+
+ENV RUN_PACKAGES="nodejs postgresql postgresql-dev tzdata" \
+    DEV_PACKAGES="build-base curl-dev gcc libc-dev libxml2-dev linux-headers make" \
+    CHROME_PACKAGES="chromium chromium-chromedriver dbus mesa-dri-swrast ttf-freefont udev wait4ports xorg-server xvfb zlib-dev"
+
+RUN apk --update --no-cache add ${RUN_PACKAGES} \
+  && apk --update --no-cache add ${DEV_PACKAGES} \
+  && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+  && apk del --purge tzdata
 
 ENV ENTRYKIT_VERSION 0.4.0
 
-# Entrykitのインストール
+# Entrykit & ChromeDriver
 RUN wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
   && tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
   && rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
   && mv entrykit /bin/entrykit \
   && chmod +x /bin/entrykit \
-  && entrykit --symlink
-
-# yarnのインストール
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-# chromedriverのインストール
-RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
-  && wget -N http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/ \
-  && unzip ~/chromedriver_linux64.zip -d ~/ \
-  && rm ~/chromedriver_linux64.zip \
-  && chown root:root ~/chromedriver \
-  && chmod 755 ~/chromedriver \
-  && mv ~/chromedriver /usr/bin/chromedriver \
-  && sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' \
-  && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-
-RUN apt-get update -qq && apt-get install -y \
-  build-essential \
-  google-chrome-stable \
-  libpq-dev \
-  nodejs \
-  yarn \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && entrykit --symlink \
+  && apk --update --no-cache add ${CHROME_PACKAGES}
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /ketsuatsu_app
 WORKDIR /ketsuatsu_app
 
-# ローカルのGemfileを追加
+# bundle install & Delete Unnecessary Packages_and_Cache & Copy File
 COPY Gemfile /ketsuatsu_app/Gemfile
 COPY Gemfile.lock /ketsuatsu_app/Gemfile.lock
-ENV BUNDLER_VERSION 2.1.2
-RUN gem install bundler -v $BUNDLER_VERSION
-RUN bundle install --no-deployment
+RUN gem install bundler --version 2.1.2 \
+  && bundle install --path vendor/bundle \
+  && find vendor/bundle/ruby -path '*/gems/*/ext/*/Makefile' -exec dirname {} \; | xargs -n1 -P$(nproc) -I{} make -C {} clean \
+  && apk del ${DEV_PACKAGES}
 COPY . /ketsuatsu_app
 
 ENTRYPOINT [ \
