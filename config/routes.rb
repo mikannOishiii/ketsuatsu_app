@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    passwords: 'users/passwords',
   }
 
   devise_scope :user do
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
     get '/login', to: 'users/sessions#new'
     post '/login', to: 'users/sessions#create'
     get '/logout', to: 'users/sessions#destroy'
+    get '/passwords/new', to: 'users/passwords#new'
+    get '/passwords/edit', to: 'users/passwords#edit'
   end
   resources :records, only: [:new, :create, :update, :destroy] do
     collection do
