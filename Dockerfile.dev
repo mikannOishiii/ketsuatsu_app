@@ -1,36 +1,51 @@
 # Node.js & Yarn
-FROM node:10.15.1-alpine as node
+FROM node:10.15.1-stretch-slim
 
-RUN apk add --no-cache --virtual .ruby-builddeps bash curl \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends curl \
   && curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.22.4 \
-  && apk del .ruby-builddeps
+  && apt-get -y remove curl \
+  && apt-get -y clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # Ruby & Bundler & postgresql-client
-FROM ruby:2.6.5-alpine
+FROM ruby:2.6.5-slim-stretch
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /opt/yarn-* /opt/yarn
 RUN ln -fs /opt/yarn/bin/yarn /usr/local/bin/yarn
 
-ENV RUN_PACKAGES="nodejs postgresql postgresql-dev tzdata" \
-    DEV_PACKAGES="build-base curl-dev gcc libc-dev libxml2-dev linux-headers make" \
-    CHROME_PACKAGES="chromium chromium-chromedriver dbus mesa-dri-swrast ttf-freefont udev wait4ports xorg-server xvfb zlib-dev"
+ENV RUN_PACKAGES="nodejs build-essential libpq-dev" \
+    BLD_PACKAGES="curl gnupg wget unzip"
 
-RUN apk --update --no-cache add ${RUN_PACKAGES} \
-  && apk --update --no-cache add ${DEV_PACKAGES} \
-  && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-  && apk del --purge tzdata
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends ${RUN_PACKAGES} \
+  && apt-get -y clean \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV ENTRYKIT_VERSION 0.4.0
 
 # Entrykit & ChromeDriver
-RUN wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends ${BLD_PACKAGES} \
+  && wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
   && tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
   && rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
   && mv entrykit /bin/entrykit \
   && chmod +x /bin/entrykit \
   && entrykit --symlink \
-  && apk --update --no-cache add ${CHROME_PACKAGES}
+  && CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
+  && wget -N http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/ \
+  && unzip ~/chromedriver_linux64.zip -d ~/ \
+  && rm ~/chromedriver_linux64.zip \
+  && chown root:root ~/chromedriver \
+  && chmod 755 ~/chromedriver \
+  && mv ~/chromedriver /usr/bin/chromedriver \
+  && sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' \
+  && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
+  && apt-get update && apt-get install -y google-chrome-stable \
+  && apt-get -y clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /ketsuatsu_app
@@ -41,8 +56,7 @@ COPY Gemfile /ketsuatsu_app/Gemfile
 COPY Gemfile.lock /ketsuatsu_app/Gemfile.lock
 RUN gem install bundler --version 2.1.2 \
   && bundle install --path vendor/bundle \
-  && find vendor/bundle/ruby -path '*/gems/*/ext/*/Makefile' -exec dirname {} \; | xargs -n1 -P$(nproc) -I{} make -C {} clean \
-  && apk del ${DEV_PACKAGES}
+  && find vendor/bundle/ruby -path '*/gems/*/ext/*/Makefile' -exec dirname {} \; | xargs -n1 -P$(nproc) -I{} make -C {} clean
 COPY . /ketsuatsu_app
 
 ENTRYPOINT [ \
