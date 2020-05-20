@@ -13,7 +13,7 @@ RSpec.feature "Registrations", type: :feature do
       fill_in "user_email", with: "user@invalid"
       fill_in "user_password", with: "foo"
       fill_in "user_password_confirmation", with: "bar"
-      check "利用規約に同意する"
+      check "user_accepted"
       click_button "Create Account"
     end
     expect(page).to have_css "div#error_explanation"
@@ -26,7 +26,7 @@ RSpec.feature "Registrations", type: :feature do
         fill_in "user_email", with: user.email
         fill_in "user_password", with: user.password
         fill_in "user_password_confirmation", with: user.password_confirmation
-        check "利用規約に同意する"
+        check "user_accepted"
         click_button "Create Account"
       end
       expect(page).to have_content "アカウント登録が完了しました。"
