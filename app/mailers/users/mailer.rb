@@ -6,7 +6,7 @@ class Users::Mailer < Devise::Mailer
   # Note that Devise passes a Devise::Mailer object to your proc, hence the parameter throwaway (*).
   # default from: ->(*) { Class.instance.email_address }
 
-  def reset_password_instructions(record, token, opts={})
+  def reset_password_instructions(record, token, opts)
     # customize
     super
   end
