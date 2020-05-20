@@ -11,6 +11,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'factory_bot'
 require 'devise'
+require 'rspec/retry'
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -45,7 +46,6 @@ RSpec.configure do |config|
   # FactoryBot 省略
   config.include FactoryBot::Syntax::Methods
 
-  config.include Devise::TestHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerMacros, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
@@ -71,4 +71,14 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  ### rspe-retry ###
+  # 実行中にリトライのステータスを表示する
+  config.verbose_retry = true
+  # リトライの原因となった例外を表示する
+  config.display_try_failure_messages = true
+
+  # js: true のスペックのみリトライを有効にする
+  config.around :each, :js do |ex|
+    ex.run_with_retry retry: 3
+  end
 end
