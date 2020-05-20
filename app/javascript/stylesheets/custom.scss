@@ -715,17 +715,10 @@ ul.social-network {
       background-color: $color-orange;
     }
   }
-  .checkbox {
-    margin-top: 10px;
-    text-align: center;
-  }
 }
 
 .registration-form {
   padding-top: 70px;
-  .checkbox {
-    margin-top: 10px;
-  }
   .create-account {
     border-radius: 30px;
     padding: 10px 20px;
@@ -738,6 +731,18 @@ ul.social-network {
     &:hover {
       background-color: $color-orange;
     }
+  }
+}
+
+.checkbox {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.forgetPassword {
+  text-align: center;
+  a {
+    font-size: 12px;
   }
 }
 
