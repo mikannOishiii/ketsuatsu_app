@@ -56,6 +56,5 @@ RSpec.describe "Sessions", type: :request do
       delete destroy_admin_session_url
       expect(response).to redirect_to root_url
     end
-
   end
 end
