@@ -6,6 +6,11 @@ User.create!(account_name:  "testuser",
              password_confirmation: "foobar",
              accepted: true)
 
+Admin.create!(account_name: "adminuser",
+              email: "admin@example.com",
+              password: "foobar",
+              password_confirmation: "foobar")
+
 CSV.foreach('db/csv/seeds.csv', headers: true) do |row|
   Record.create(
     date: row[0],
