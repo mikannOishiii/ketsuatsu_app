@@ -2,6 +2,18 @@ ja:
   activerecord:
     errors:
       models:
+        admin:
+          attributes:
+            account_name:
+              blank: "が入力されていません"
+              taken: "他のユーザーが使用しています"
+            email:
+              blank: "が入力されていません"
+              taken: "既に登録されています"
+              invalid: "このアドレスは無効な形式です"
+            password:
+              blank: "が入力されていません"
+              too_short: "6文字以上で入力してください"
         user:
           attributes:
             account_name:
@@ -15,6 +27,10 @@ ja:
               blank: "が入力されていません"
               too_short: "6文字以上で入力してください"
     attributes:
+      admin:
+        account_name: アカウント名
+        email: メールアドレス
+        password: パスワード
       user:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
@@ -50,6 +66,7 @@ ja:
         n_sbp: 夜の目標最高血圧値(mmHg)
         n_dbp: 夜の目標最低血圧値(mmHg)
     models:
+      admin: 管理者
       user: ユーザ
   devise:
     confirmations:

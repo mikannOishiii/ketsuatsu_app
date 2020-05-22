@@ -19,6 +19,8 @@
       <% end %>
       <% if user_signed_in? %>
         <%= render 'layouts/login_user_header' %>
+      <% elsif admin_signed_in? %>
+        <%= render 'layouts/admin_user_header' %>
       <% else %>
         <%= render 'layouts/no_login_user_header' %>
       <% end %>
