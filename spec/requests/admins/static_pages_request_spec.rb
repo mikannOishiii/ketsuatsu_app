@@ -9,6 +9,7 @@ RSpec.describe "Admins::StaticPages", type: :request do
         sign_in admin
         get admins_dashboard_url
       end
+
       it "リクエストが成功すること" do
         expect(response.status).to eq 200
       end
@@ -18,6 +19,7 @@ RSpec.describe "Admins::StaticPages", type: :request do
       before do
         get admins_dashboard_url
       end
+
       it "リクエストが成功すること" do
         expect(response.status).to eq 302
       end
@@ -27,5 +29,4 @@ RSpec.describe "Admins::StaticPages", type: :request do
       end
     end
   end
-
 end
