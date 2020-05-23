@@ -21,8 +21,9 @@ RSpec.feature "Admin::Sessions", type: :system do
     click_button "ログイン"
     expect(page).to have_content "ログインしました。"
     expect(page).to have_selector "a.nav-link", text: "ログアウト"
+    expect(current_path).to eq admins_dashboard_path
     click_link "ログアウト"
     expect(page).to have_content "ログアウトしました。"
-    expect(current_path).to eq root_path
+    expect(current_path).to eq new_admin_session_path
   end
 end
