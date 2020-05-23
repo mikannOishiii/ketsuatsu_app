@@ -21,7 +21,7 @@ RSpec.describe "Sessions", type: :request do
       end
 
       it "リダイレクトすること" do
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to admins_dashboard_url
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe "Sessions", type: :request do
 
     it "リダイレクトされること" do
       delete destroy_admin_session_url
-      expect(response).to redirect_to root_url
+      expect(response).to redirect_to new_admin_session_url
     end
   end
 end
