@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admins do
+    get '/dashboard', to: 'static_pages#dashboard'
+  end
   devise_for :admins, :controllers => {
     sessions: 'admins/sessions',
   }
