@@ -1,0 +1,13 @@
+<%= form_for @post, url: admins_post_path  do |f| %>
+  <%= render 'admins/posts/error_messages' %>
+  <div class="field">
+    <%= f.label :title, for: "inputTitle" %>
+    <%= f.text_field :title, placeholder: "記事タイトル", class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :content, for: "inputContent" %>
+    <%= f.text_area :content, placeholder: "記事本文...", class: "form-control" %>
+  </div>
+  <%= f.submit "投稿する", class: "btn btn-primary" %>
+<% end %>
+<%= link_to "削除する", admins_post_path(@post.id), method: :delete, data: { confirm: "削除してよろしいですか？" } %>
