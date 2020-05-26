@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def admin_user
+    redirect_to new_admin_session_url unless admin_signed_in?
+  end
+
   def record_params
     params.require(:record).
       permit(:date, :m_sbp, :m_dbp, :m_pulse, :n_sbp, :n_dbp, :n_pulse, :memo,).

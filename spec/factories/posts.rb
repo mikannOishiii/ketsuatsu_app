@@ -3,5 +3,9 @@ FactoryBot.define do
     title { "MyTitle" }
     content { "MyContent" }
     association :admin
+
+    trait :invalid do
+      title { "" }
+    end
   end
 end
