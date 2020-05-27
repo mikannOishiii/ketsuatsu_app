@@ -1,5 +1,8 @@
 <tr>
-  <th scope="row" class="text-center"><%= record.date %></th>
+  <th scope="row" class="text-center">
+    <%= link_to record.date, edit_record_path(record.id), remote: true, id: "record-modal", class: "nav-link",
+        data: {toggle: "modal", target: "#recordModal"} %>
+  </th>
   <td class="text-center"><%= record.m_sbp %></td>
   <td class="text-center"><%= record.m_dbp %></td>
   <td class="text-center"><%= record.m_pulse %></td>
