@@ -30,6 +30,10 @@ class RecordsController < ApplicationController
     end
   end
 
+  def edit
+    @record = current_user.records.find(params[:id])
+  end
+
   def update
     @record = current_user.records.find_by(date: params[:record][:date])
     respond_to do |format|

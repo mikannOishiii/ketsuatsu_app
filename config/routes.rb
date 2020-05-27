@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     get '/passwords/new', to: 'users/passwords#new'
     get '/passwords/edit', to: 'users/passwords#edit'
   end
-  resources :records, only: [:new, :create, :update, :destroy] do
+  resources :records, only: [:new, :create, :edit, :update, :destroy] do
     collection do
       get 'search'
       post 'date_range'
