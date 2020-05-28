@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_104035) do
   end
 
   create_table "records", force: :cascade do |t|
-    t.date "date"
+    t.date "date", null: false
     t.integer "m_sbp"
     t.integer "m_dbp"
     t.integer "m_pulse"
