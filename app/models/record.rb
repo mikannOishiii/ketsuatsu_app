@@ -22,9 +22,12 @@ class Record < ApplicationRecord
   end
 
   # 今月
-  scope :current_month, -> { where(date: Time.now.beginning_of_month..Time.now.end_of_month) }
+  # scope :current_month, -> { where(date: Time.now.beginning_of_month..Time.now.end_of_month) }
+  scope :current_month, -> { where(date: Time.now.all_month) }
   # 先月
-  scope :last_month, -> { where(date: Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month) }
+  # scope :last_month, -> { where(date: Time.now.prev_month.beginning_of_month..Time.now.prev_month.end_of_month) }
+  scope :last_month, -> { where(date: Time.now.prev_month.all_month) }
   # 直近一週間
-  scope :last_week, -> { where(date: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day) }
+  # scope :last_week, -> { where(date: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day) }
+  scope :last_week, -> { where(date: 7.days.ago..Time.now) }
 end
