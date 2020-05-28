@@ -37,15 +37,15 @@ RSpec.feature "Record", type: :system do
     sleep 0.5
     fill_in "inputM_SBP", with: 150
     click_on "記録する"
+    sleep 1
     expect(current_path).to eq root_path
-    sleep 0.5
     expect(page).to have_content "記録を作成しました。"
     click_on "記入する"
     sleep 0.5
     expect(page).to have_content "150"
     fill_in "inputM_SBP", with: 160
     click_on "記録する"
-    sleep 0.5
+    sleep 1
     expect(current_path).to eq root_path
     expect(page).to have_content "記録を更新しました。"
     expect(page).to have_content Time.now.strftime("%Y-%m-%d")
@@ -70,8 +70,8 @@ RSpec.feature "Record", type: :system do
     expect(page).to have_content record_yesterday.m_sbp
     fill_in "inputM_SBP", with: 155
     click_on "記録する"
-    expect(current_path).to eq root_path
     sleep 0.5
+    expect(current_path).to eq root_path
     expect(page).to have_content "記録を更新しました。"
     click_on "記入する"
     sleep 0.5
