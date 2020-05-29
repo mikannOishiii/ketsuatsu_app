@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_reader
   has_many :records, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

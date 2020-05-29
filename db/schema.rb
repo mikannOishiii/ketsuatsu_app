@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_104035) do
+ActiveRecord::Schema.define(version: 2020_05_29_023639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 2020_05_25_104035) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id", "created_at"], name: "index_posts_on_admin_id_and_created_at"
     t.index ["admin_id"], name: "index_posts_on_admin_id"
+  end
+
+  create_table "read_marks", id: :serial, force: :cascade do |t|
+    t.string "readable_type", null: false
+    t.integer "readable_id"
+    t.string "reader_type", null: false
+    t.integer "reader_id"
+    t.datetime "timestamp"
+    t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable_type_and_readable_id"
+    t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", unique: true
+    t.index ["reader_type", "reader_id"], name: "index_read_marks_on_reader_type_and_reader_id"
   end
 
   create_table "records", force: :cascade do |t|

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       post 'date_range'
     end
   end
+  resources :articles, only: [:index, :show]
   get '/terms', to: 'static_pages#terms'
   get '/export', to: 'static_pages#export'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
