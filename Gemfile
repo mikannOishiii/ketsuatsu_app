@@ -25,6 +25,7 @@ gem 'devise-i18n'
 gem 'chartkick'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'unread'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
