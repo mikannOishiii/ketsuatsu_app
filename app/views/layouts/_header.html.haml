@@ -1,5 +1,5 @@
 / ======= Header =======
-%header#header.fixed-top
+%header.fixed-top#header
   .container-header
     %nav.navbar.navbar-expand-lg.h-100
       .logo.mr-auto
@@ -14,7 +14,7 @@
       = button_tag type: "button", class: "navbar-toggler nav_button", data: { toggle: "dropdown", target: "#headerMenu" } do
         menu
       - if user_signed_in?
-        = render "layouts/login_user_header"
+        = render "layouts/login_user_header", record: record
       - elsif admin_signed_in?
         = render "layouts/admin_user_header"
       - else

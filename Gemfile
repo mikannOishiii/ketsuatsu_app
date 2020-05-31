@@ -40,6 +40,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'rubocop-airbnb'
+  gem 'haml_lint', require: false
 end
 
 group :development do

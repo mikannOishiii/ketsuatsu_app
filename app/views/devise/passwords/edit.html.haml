@@ -1,7 +1,7 @@
 - provide(:title, "パスワードリセット")
 - provide(:h1, "パスワードリセット")
 / ======= Signup Section =======
-%section#signup-section.section-bg
+%section.section-bg#signup-section
   .container.registration-form
     .row
       = render "devise/shared/signup_menu", user: @user
@@ -20,7 +20,6 @@
                     = f.label :password, class: "col-4 col-form-label"
                     .col-8
                       = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control item", placeholder: "※英数角#{@minimum_password_length}文字以上"
-                  
                   .form-group.row
                     = f.label :password_confirmation, class: "col-4 col-form-label"
                     .col-8

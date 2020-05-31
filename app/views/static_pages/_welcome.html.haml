@@ -7,12 +7,12 @@
         %h1 かんたん血圧管理
         %h2 高血圧予防に。グラフで血圧推移を可視化、CSV出力もできます。
         = link_to "今すぐはじめる", signup_path, class: "btn-get-started scrollto"
-        = link_to "ログインはこちら", login_path, remote: :true, id: "login-modal", class: "btn-get-logined", data: {toggle: "modal", target: "#loginModal"}
+        = link_to "ログインはこちら", login_path, remote: :true, id: "login-modal", class: "btn-get-logined", data: { toggle: "modal", target: "#modal-login" }
       .col-lg-6.order-1.order-lg-2.hero-img
         = image_tag "/assets/hero_img.png", class: "img-fluid"
 
 / ======= Services Section =======
-%section#services.services.section-bg
+%section.services.section-bg#services
   .container
     .section-title
       %h2 Services
@@ -20,7 +20,6 @@
         血圧管理をかんたんサポート。毎日の血圧管理に役立つ便利な機能を利用できます。
         %br
         （画像はイメージ画像です。実際のアプリ画像ではありません。）
-    
     .row
       .col-md-6.d-flex.align-items-stretch
         .card
@@ -29,7 +28,6 @@
           .card-body
             %h5.card-title 記録する
             %p.card-text 画面から簡単な操作で朝晩の血圧数値やメモが残せます。もちろんモバイルやタブレットでも記録できます。
-      
       .col-md-6.d-flex.align-items-stretch
         .card
           .card-img
@@ -38,7 +36,6 @@
             %h5.card-title 傾向を知る
             %p.card-text
               グラフによってあなたの血圧の傾向を知ることができます。目標を設定すると、達成度合いも分かります。（目標機能は現在開発中）
-      
       .col-md-6.d-flex.align-items-stretch
         .card
           .card-img
@@ -47,7 +44,6 @@
             %h5.card-title 紙で見る
             %p.card-text
               先月分のデータをCSVに出力できます。エクセルなどに落として、印刷することも可能です。
-      
       .col-md-6.d-flex.align-items-stretch
         .card
           .card-img
@@ -56,5 +52,4 @@
             %h5.card-title サンプルです
             %p.card-text
               このアプリはみかん太郎のサンプルアプリケーションです。データは予告なく破棄する可能性があります。
-
 = render "devise/shared/login_form"

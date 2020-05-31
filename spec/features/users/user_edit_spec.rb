@@ -14,7 +14,7 @@ RSpec.feature "UserEdit", type: :feature do
     fill_in "user_current_password", with: ""
     click_on "Update"
 
-    expect(page).to have_css "#error_explanation"
+    expect(page).to have_css "#error-explanation"
   end
 
   scenario "プロフィール編集に成功する" do
@@ -37,7 +37,7 @@ RSpec.feature "UserEdit", type: :feature do
     fill_in "user_current_password", with: user.password
     click_on "Update"
 
-    expect(page).to have_css "#error_explanation"
+    expect(page).to have_css "#error-explanation"
   end
 
   scenario "パスワード変更に成功する" do

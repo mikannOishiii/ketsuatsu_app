@@ -1,7 +1,7 @@
 - provide(:title, "設定変更")
 - provide(:h1, "設定変更")
 / ======= Profile Section =======
-%section#profile-section.section-bg
+%section.section-bg#profile-section
   .container
     .row
       = render "devise/shared/account_menu", user: @user
@@ -21,22 +21,18 @@
                     = f.label :m_sbp, class: "col-4 col-form-label"
                     .col-8
                       = f.telephone_field :m_sbp, class: "form-control item", placeholder: ""
-                  
                   .form-group.row
                     = f.label :m_dbp, class: "col-4 col-form-label"
                     .col-8
                       = f.telephone_field :m_dbp, class: "form-control item", placeholder: ""
-                  
                   .form-group.row
                     = f.label :n_sbp, class: "col-4 col-form-label"
                     .col-8
                       = f.telephone_field :n_sbp, class: "form-control item", placeholder: ""
-                  
                   .form-group.row
                     = f.label :n_dbp, class: "col-4 col-form-label"
                     .col-8
                       = f.telephone_field :n_dbp, class: "form-control item", placeholder: ""
-                  
                   .form-group.row
                     .offset-4.col-8
                       = f.submit "現在、保存はできません", class: "btn btn-primary"

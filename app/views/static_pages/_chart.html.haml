@@ -1,5 +1,5 @@
 / ======= Graph Section =======
-%section#graph-section.section-bg
+%section.section-bg#graph-section
   .container.d-flex.justify-content-between
     %h2.board-title Dashboard
     = render "date_range"
@@ -10,4 +10,4 @@
           .card-body
             %canvas#canvas
             #drawchart-area
-              = render "records/drawchart", records: @records
+              = render "records/drawchart", records: records
