@@ -1,0 +1,41 @@
+/-- Modal --
+.modal-dialog{ role: :document }
+  .modal-content
+    = form_for record, remote: true do |f|
+      - if record.errors.any?
+        .alert.alert-warning
+          %ul
+            - record.errors.full_messages.each do |message|
+              %li
+                = message
+      .form-group
+        = f.label :date, for: "inputDate"
+        = f.date_field :date, class: "form-control", id: "inputDate", value: (record.date || Time.now)
+      %p.rcd-lbl 朝：
+      .form-row
+        .form-group.col-md-4
+          = f.label :m_sbp, for: "inputM_SBP", class: "sr-only"
+          = f.telephone_field :m_sbp, placeholder: "最高血圧", class: "form-control", id: "inputM_SBP", value: record.m_sbp
+        .form-group.col-md-4
+          = f.label :m_dbp, for: "inputM_DBP", class: "sr-only"
+          = f.telephone_field :m_dbp, placeholder: "最低血圧", class: "form-control", id: "inputM_DBP", value: record.m_dbp
+        .form-group.col-md-4
+          = f.label :m_pulse, for: "inputM_PLS", class: "sr-only"
+          = f.telephone_field :m_pulse, placeholder: "最低血圧", class: "form-control", id: "inputM_PLS", value: record.m_pulse
+      %p.rcd-lbl 夜：
+      .form-row
+        .form-group.col-md-4
+          = f.label :n_sbp, for: "inputN_SBP", class: "sr-only"
+          = f.telephone_field :n_sbp, placeholder: "最高血圧", class: "form-control", id: "inputN_SBP", value: record.n_sbp
+        .form-group.col-md-4
+          = f.label :n_dbp, for: "inputN_DBP", class: "sr-only"
+          = f.telephone_field :n_dbp, placeholder: "最低血圧", class: "form-control", id: "inputN_DBP", value: record.n_dbp
+        .form-group.col-md-4
+          = f.label :n_pulse, for: "inputN_PLS", class: "sr-only"
+          = f.telephone_field :n_pulse, placeholder: "最低血圧", class: "form-control", id: "inputN_PLS", value: record.n_pulse
+      .form-group
+        = f.submit "記録する", class: "btn btn-block btn-blue", id: "record-btn"
+    - if !record.id.nil?
+      = link_to "削除する", record, id: "destroy_form", class: "btn btn-gray", method: :delete, data: { confirm: "本当に削除しますか？" }
+    - else
+      = link_to "削除する", record, id: "destroy_form", class: "btn btn-gray disabled", method: :delete, data: { confirm: "本当に削除しますか？" }

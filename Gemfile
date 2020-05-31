@@ -26,6 +26,7 @@ gem 'chartkick'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'unread'
+gem 'haml-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -39,6 +40,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'rubocop-airbnb'
+  gem 'haml_lint', require: false
 end
 
 group :development do

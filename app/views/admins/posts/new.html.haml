@@ -1,0 +1,10 @@
+= form_for(@post, url: admins_posts_path) do |f|
+  = render partial: "admins/posts/error_messages"
+  .field
+    = f.label :title, for: "inputTitle"
+    = f.text_field :title, placeholder: "記事タイトル", class: "form-control"
+  .field
+    = f.label :content, for: "inputContent"
+    = f.text_area :content, placeholder: "記事本文...", class: "form-control"
+
+  = f.submit "投稿する", class: "btn btn-primary"

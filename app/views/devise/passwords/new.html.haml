@@ -1,0 +1,24 @@
+- provide(:title, "パスワードをお忘れですか？")
+- provide(:h1, "パスワードをお忘れですか？")
+/ ======= Signup Section =======
+%section.section-bg#signup-section
+  .container.registration-form
+    .row
+      = render "devise/shared/signup_menu", user: @user
+      .col-md-9
+        .card
+          .card-body
+            .terms_inner
+              %h1.terms_title
+                = yield(:h1)
+            .row
+              .col-md-12
+                %div
+                  %p パスワードをリセットするにはメールアドレスを入力してください。パスワードのご案内メールを送信いたします。
+                = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+                  = render "devise/shared/error_messages", resource: resource
+                  .form-group.row
+                    = f.label :email, class: "col-4 col-form-label"
+                    .col-8
+                      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control item", placeholder: "email"
+                  = f.submit "送信する", class: "btn btn-block btn-blue"

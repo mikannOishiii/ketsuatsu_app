@@ -16,7 +16,7 @@ RSpec.feature "Registrations", type: :feature do
       check "user_accepted"
       click_button "Create Account"
     end
-    expect(page).to have_css "div#error_explanation"
+    expect(page).to have_css "div#error-explanation"
   end
 
   scenario "ユーザー登録に成功する" do

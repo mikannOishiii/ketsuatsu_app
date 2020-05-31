@@ -1,0 +1,21 @@
+/ ======= Table Section =======
+%section.section-bg#table-section
+  .container.d-flex
+    %h2.board-title Daily Report
+  .container
+    .content-area
+      %table.table.table-hover.table-bordered
+        %thead.thead-light
+          %tr
+            %th.text-center{ rowspan: 2 } 年月日
+            %th.text-center{ colspan: 3 } 朝<i class="fas fa-cloud-sun"></i>
+            %th.text-center{ colspan: 3 } 夜<i class="fas fa-moon"></i>
+            %th.text-center メモ
+          %tr
+            %th.text-center{ colspan: 2 } 血圧値[最高/最低](mmHg)
+            %th.text-center 脈拍/分
+            %th.text-center{ colspan: 2 } 血圧値[最高/最低](mmHg)
+            %th.text-center 脈拍/分
+            %th.text-center ※体調など
+        %tbody#record-table
+          = render records

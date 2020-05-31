@@ -1,0 +1,15 @@
+- provide(:title, "エクスポート")
+/ ======= Output Section =======
+%section.section-bg#output-section
+  .container.d-flex
+    %h1.board-title エクスポート
+  .container
+    .row
+      .col-12
+        .content-area
+          .card-body
+            %p
+              先月分のデータが出力できます。CSVの出力は
+              = link_to "ここをクリック", export_path(@records, format: :csv)
+/ -- End Output Section --
+= render 'table', records: @records

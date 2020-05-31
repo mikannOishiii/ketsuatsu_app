@@ -9,7 +9,7 @@ RSpec.feature "Registrations", type: :feature do
 
   scenario "ログインに失敗しエラー情報を返す", js: true do
     click_on "ログインはこちら"
-    within "#nameLogin" do
+    within "#name-login" do
       fill_in "user_account_name", with: user.account_name
       fill_in "user_password", with: "foo"
       click_on "ログイン"
@@ -19,7 +19,7 @@ RSpec.feature "Registrations", type: :feature do
 
   scenario "ユーザー登録に成功する", js: true do
     click_on "ログインはこちら"
-    within "#nameLogin" do
+    within "#name-login" do
       fill_in "user_account_name", with: user.account_name
       fill_in "user_password", with: user.password
       click_on "ログイン"

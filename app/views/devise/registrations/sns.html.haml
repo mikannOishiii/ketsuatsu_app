@@ -1,0 +1,29 @@
+- provide(:title, "SNSログイン")
+- provide(:h1, "SNSログイン")
+/ ======= Signup Section =======
+%section.section-bg#signup-section
+  .container.registration-form
+    .row
+      = render "devise/shared/signup_menu", user: @user
+      .col-md-9
+        .card
+          .card-body
+            .terms_inner
+              %h1.terms_title
+                = yield(:h1)
+            .row
+              .col-md-12
+                .snslogin-container
+                  .demo-alert.alert-danger
+                    %p
+                      【採用担当者の方へ】デモアカウントでもログインできます。
+                      %br
+                      <b>testuser</b> / <b>foobar</b>
+                  .row
+                    .col-md-12
+                      = link_to user_facebook_omniauth_authorize_path, class: "btn btn-fb btn-block", title: "Facebook" do
+                        <i class="fab fa-facebook-f"></i>Sign in with Facebook
+                  .row
+                    .col-md-12
+                      = link_to user_twitter_omniauth_authorize_path, class: "btn btn-tw btn-block", title: "Twitter" do
+                        <i class="fab fa-twitter"></i>Sign in with Twitter
