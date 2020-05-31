@@ -1,7 +1,7 @@
 - provide(:title, "会員登録")
 - provide(:h1, "会員登録")
 / ======= Signup Section =======
-%section#signup-section.section-bg
+%section.section-bg#signup-section
   .container.registration-form
     .row
       = render "devise/shared/signup_menu", user: @user
@@ -21,34 +21,28 @@
                       %br
                       = link_to "ログインページ", login_path, class: "text-danger"
                       に移動して<b>testuser</b> / <b>foobar</b>
-                  
                   .form-group.row
                     = f.label :account_name, class: "col-4 col-form-label"
                     .col-8
                       = f.text_field :account_name, autocomplete: "account_name", class: "form-control item", placeholder: "Username ※英数角#{@minimum_password_length}文字以上"
-                  
                   .form-group.row
                     = f.label :password, class: "col-4 col-form-label"
                     .col-8
                       = f.password_field :password, autocomplete: "new-password", class: "form-control item", placeholder: "Password ※英数角6文字以上"
-                  
                   .form-group.row
                     = f.label :password_confirmation, class: "col-4 col-form-label"
                     .col-8
                       = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control item", placeholder: "Password(確認)"
-                  
                   .form-group.row
                     = f.label :email, class: "col-4 col-form-label"
                     .col-8
                       = f.email_field :email, autocomplete: "email", class: "form-control item", placeholder: "email"
-                  
                   .form-group
                     .checkbox
                       %p
                         = f.check_box :accepted, {}, checked_value = "true", unchecked_value = "false"
                         = link_to "利用規約", terms_path
                         に同意する
-                  
                   .form-group
                     = f.submit "Create Account", class: "btn btn-block create-account"
                     .checkbox

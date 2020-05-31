@@ -1,17 +1,14 @@
 %h2 Log in
 
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-
   .field
     = f.label :account_name
     %br
     = f.text_field :account_name, autofocus: true, autocomplete: "account_name"
-
   .field
     = f.label :email
     %br
     = f.email_field :email, autofocus: true, autocomplete: "email"
-  
   .field
     = f.label :password
     %br

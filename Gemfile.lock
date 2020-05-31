@@ -108,6 +108,11 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 5.1)
+    haml_lint (0.35.0)
+      haml (>= 4.0, < 5.2)
+      rainbow
+      rubocop (>= 0.50.0)
+      sysexits (~> 1.1)
     hashie (4.1.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
@@ -293,6 +298,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sysexits (1.2.0)
     temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -335,6 +341,7 @@ DEPENDENCIES
   devise-i18n
   factory_bot_rails
   haml-rails
+  haml_lint
   jbuilder (~> 2.7)
   launchy
   listen (>= 3.0.5, < 3.2)
