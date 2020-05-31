@@ -8,10 +8,10 @@
     window.myChart = new Chart(ctx, { // インスタンスをグローバル変数で生成
       type: 'line',
       data: {
-        labels: <%= @records.pluck(:date).to_json.html_safe %>,
+        labels: <%= records.pluck(:date).to_json.html_safe %>,
         datasets: [{
           label: '最高血圧(朝)',
-          data: <%= @records.pluck(:m_sbp).to_json.html_safe %>,
+          data: <%= records.pluck(:m_sbp).to_json.html_safe %>,
           borderWidth: 3,
           borderColor: 'Tomato',
           pointBorderColor: '#fff',
@@ -21,7 +21,7 @@
           fill: false,
         }, {
           label: '最低血圧(朝)',
-          data: <%= @records.pluck(:m_dbp).to_json.html_safe %>,
+          data: <%= records.pluck(:m_dbp).to_json.html_safe %>,
           borderWidth: 3,
           borderColor: 'Tomato',
           pointBackgroundColor: 'Tomato',
@@ -30,7 +30,7 @@
           fill: false,
         }, {
           label: '最高血圧(夜)',
-          data: <%= @records.pluck(:n_sbp).to_json.html_safe %>,
+          data: <%= records.pluck(:n_sbp).to_json.html_safe %>,
           borderWidth: 3,
           borderColor: '#66ccff',
           pointBorderColor: '#fff',
@@ -40,7 +40,7 @@
           fill: false,
         }, {
           label: '最低血圧(夜)',
-          data: <%= @records.pluck(:n_dbp).to_json.html_safe %>,
+          data: <%= records.pluck(:n_dbp).to_json.html_safe %>,
           borderWidth: 3,
           borderColor: '#66ccff',
           pointBackgroundColor: '#66ccff',

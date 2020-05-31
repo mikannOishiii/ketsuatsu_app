@@ -1,0 +1,19 @@
+linters:
+
+  LineLength:
+    enabled: true
+    max: 200
+    exclude:
+      - 'vendor/**/*'
+      - 'app/views/static_pages/terms.html.haml'
+
+  RuboCop:
+    enabled: false
+
+  SpaceInsideHashAttributes:
+    exclude:
+      - 'vendor/**/*'
+
+  ViewLength:
+    enabled: true
+    max: 200

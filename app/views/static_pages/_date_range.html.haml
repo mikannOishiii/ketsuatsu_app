@@ -1,0 +1,3 @@
+= form_with url: date_range_records_path, class: "form-inline form-date-range" do |f|
+  = f.select :date_range, [["今月", "current_month"], ["先月", "last_month"], ["直近一週間", "last_week"]], {}, { class: "form-control" }
+  = f.submit "切替", class: "form-control"

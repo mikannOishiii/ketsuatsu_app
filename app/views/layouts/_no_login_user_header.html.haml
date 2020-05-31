@@ -1,0 +1,11 @@
+.collapse.navbar-collapse.nav-menu#header-menu
+  %ul.navbar-nav.ml-auto
+    %li.nav-item
+      = link_to "このサイトについて", root_path(anchor: "services"), class: "nav-link"
+    %li.nav-item
+      - if current_page?(root_path)
+        = link_to "ログイン", login_path, remote: :true, id: "login-modal", class: "nav-link", data: { toggle: "modal", target: "#modal-login" }
+      - else
+        = link_to "ログイン", login_path, class: "nav-link"
+    %li.nav-item.get-started
+      = link_to "アカウント登録", signup_path, class: "nav-link"
