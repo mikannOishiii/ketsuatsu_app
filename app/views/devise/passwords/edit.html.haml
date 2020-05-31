@@ -1,0 +1,29 @@
+- provide(:title, "パスワードリセット")
+- provide(:h1, "パスワードリセット")
+/ ======= Signup Section =======
+%section#signup-section.section-bg
+  .container.registration-form
+    .row
+      = render "devise/shared/signup_menu", user: @user
+      .col-md-9
+        .card
+          .card-body
+            .terms_inner
+              %h1.terms_title
+                = yield(:h1)
+            .row
+              .col-md-12
+                = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+                  = render "devise/shared/error_messages", resource: resource
+                  = f.hidden_field :reset_password_token
+                  .form-group.row
+                    = f.label :password, class: "col-4 col-form-label"
+                    .col-8
+                      = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control item", placeholder: "※英数角#{@minimum_password_length}文字以上"
+                  
+                  .form-group.row
+                    = f.label :password_confirmation, class: "col-4 col-form-label"
+                    .col-8
+                      = f.password_field :password_confirmation, autofocus: true, autocomplete: "new-password", class: "form-control item"
+
+                  = f.submit "パスワードをリセット", class: "btn btn-block btn-blue"

@@ -1,0 +1,22 @@
+/ ======= Header =======
+%header#header.fixed-top
+  .container-header
+    %nav.navbar.navbar-expand-lg.h-100
+      .logo.mr-auto
+        - if current_page?(root_path)
+          %h1.text-light
+            = link_to root_path, class: "navbar-brand" do
+              けつあつ<span>+plus</span>
+        - else
+          .h1cls
+            = link_to root_path, class: "navbar-brand" do
+              けつあつ<span>+plus</span>
+      = button_tag type: "button", class: "navbar-toggler nav_button", data: { toggle: "dropdown", target: "#headerMenu" } do
+        menu
+      - if user_signed_in?
+        = render "layouts/login_user_header"
+      - elsif admin_signed_in?
+        = render "layouts/admin_user_header"
+      - else
+        = render "layouts/no_login_user_header"
+= render "layouts/modal"

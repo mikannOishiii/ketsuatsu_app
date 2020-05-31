@@ -1,6 +1,0 @@
-<% if user_signed_in? %>
-  <%= render 'chart', records: @records %>
-  <%= render 'table', records: @records %>
-<% else %>
-  <%= render 'welcome' %>
-<% end %>

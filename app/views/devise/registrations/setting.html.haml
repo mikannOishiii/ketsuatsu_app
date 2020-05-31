@@ -1,0 +1,42 @@
+- provide(:title, "設定変更")
+- provide(:h1, "設定変更")
+/ ======= Profile Section =======
+%section#profile-section.section-bg
+  .container
+    .row
+      = render "devise/shared/account_menu", user: @user
+      .col-md-9
+        .card
+          .card-body
+            .terms_inner
+              %h1.terms_title
+                = yield(:h1)
+            .row
+              .col-md-12
+                .profile-inner-text.alert-danger 現在開発中です。少々お待ちください。
+                = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+                  = render "devise/shared/error_messages", resource: resource
+
+                  .form-group.row
+                    = f.label :m_sbp, class: "col-4 col-form-label"
+                    .col-8
+                      = f.telephone_field :m_sbp, class: "form-control item", placeholder: ""
+                  
+                  .form-group.row
+                    = f.label :m_dbp, class: "col-4 col-form-label"
+                    .col-8
+                      = f.telephone_field :m_dbp, class: "form-control item", placeholder: ""
+                  
+                  .form-group.row
+                    = f.label :n_sbp, class: "col-4 col-form-label"
+                    .col-8
+                      = f.telephone_field :n_sbp, class: "form-control item", placeholder: ""
+                  
+                  .form-group.row
+                    = f.label :n_dbp, class: "col-4 col-form-label"
+                    .col-8
+                      = f.telephone_field :n_dbp, class: "form-control item", placeholder: ""
+                  
+                  .form-group.row
+                    .offset-4.col-8
+                      = f.submit "現在、保存はできません", class: "btn btn-primary"
