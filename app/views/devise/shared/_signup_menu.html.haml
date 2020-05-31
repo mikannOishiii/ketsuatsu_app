@@ -1,0 +1,6 @@
+.col-md-3
+  .list-group
+    = link_to "会員登録", signup_path, class: "list-group-item list-group-item-action  #{'active' if current_page?(signup_path)}"
+    = link_to "SNSログイン", signup_with_sns_path, class: "list-group-item list-group-item-action #{'active' if current_page?(signup_with_sns_path)}"
+    = link_to "ログイン", login_path, class: "list-group-item list-group-item-action #{'active' if current_page?(login_path)}"
+    = link_to "利用規約", terms_path, class: "list-group-item list-group-item-action #{'active' if current_page?(terms_path)}"

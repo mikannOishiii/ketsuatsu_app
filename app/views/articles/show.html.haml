@@ -1,0 +1,18 @@
+- provide(:title, @article.title)
+- provide(:h1, @article.title)
+/ ======= Read/Unread Section =======
+%section#read-section
+  .container.registration-form
+    .row
+      .col-md-3
+        .list-group
+          = link_to "コラム一覧", articles_path, class: "list-group-item list-group-item-action  #{'active' if current_page?(articles_path)}"
+      .col-md-9
+        .card
+          .card-body
+            .terms_inner
+              %h1.terms_title
+                = yield(:h1)
+            .row
+              .col-md-12.unread_articles
+                = @article.content

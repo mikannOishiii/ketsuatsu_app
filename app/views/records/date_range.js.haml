@@ -1,0 +1,2 @@
+$('#record_table').empty().append("#{escape_javascript(render @records)}")
+$('#drawchart-area').empty().append("#{escape_javascript(render "drawchart", records: @records)}")

@@ -1,0 +1,21 @@
+- provide(:title, "アカウント削除")
+- provide(:h1, "アカウント削除")
+/ ======= Profile Section =======
+%section#profile-section.section-bg
+  .container
+    .row
+      = render "devise/shared/account_menu", user: @user
+      .col-md-9
+        .card
+          .card-body
+            .terms_inner
+              %h1.terms_title
+                = yield(:h1)
+            .row
+              .col-md-12
+                .profile-inner-text
+                  このアカウントを削除すると、2度の過去のデータを復元できません。
+                  %br
+                  アカウントを削除しますか？
+                .btn-area
+                  = link_to "アカウント削除", registration_path(resource_name), data: { confirm: "本当に削除しますか?" }, method: :delete, class: "btn btn-primary"

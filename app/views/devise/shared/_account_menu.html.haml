@@ -1,0 +1,6 @@
+.col-md-3
+  .list-group
+    = link_to "プロフィール編集", account_profile_edit_path, class: "list-group-item list-group-item-action  #{'active' if current_page?(account_profile_edit_path)}"
+    = link_to "パスワード変更", account_password_edit_path, class: "list-group-item list-group-item-action #{'active' if current_page?(account_password_edit_path)}"
+    = link_to "設定変更", account_setting_path, class: "list-group-item list-group-item-action #{'active' if current_page?(account_setting_path)}"
+    = link_to "アカウント削除", account_leave_path, class: "list-group-item list-group-item-action #{'active' if current_page?(account_leave_path)}"
