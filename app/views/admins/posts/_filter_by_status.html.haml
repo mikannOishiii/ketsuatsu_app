@@ -1,0 +1,3 @@
+= form_with url: status_admins_posts_path, class: "form-inline status-range" do |f|
+  = f.select :status, Post.statuses.map { |k, v| [t("enums.post.status.#{k}"), v] }, { include_blank: true }, { class: "form-control" }
+  = f.submit "絞込", class: "form-control"

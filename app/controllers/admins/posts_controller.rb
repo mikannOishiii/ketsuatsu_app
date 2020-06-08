@@ -40,9 +40,23 @@ class Admins::PostsController < ApplicationController
     redirect_to admins_dashboard_url
   end
 
+  def status
+    if params[:status] == "0"
+      @posts = Post.all.draft
+    elsif params[:status] == "1"
+      @posts = Post.all.published
+    elsif params[:status] == "2"
+      @posts = Post.all.unpublished
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :status)
   end
 end
