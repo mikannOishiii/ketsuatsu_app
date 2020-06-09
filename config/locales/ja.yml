@@ -1,4 +1,10 @@
 ja:
+  enums:
+    post:
+      status:
+        draft: 下書き中
+        published: 公開
+        unpublished: 非公開
   activerecord:
     errors:
       messages:

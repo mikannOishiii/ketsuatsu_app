@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   namespace :admins do
-    resources :posts, only: [:index, :new, :edit, :create, :update, :destroy]
+    resources :posts, only: [:index, :new, :edit, :create, :update, :destroy] do
+      collection do
+        post 'status'
+      end
+    end
     get '/dashboard', to: 'static_pages#dashboard'
   end
   devise_for :admins, :controllers => {

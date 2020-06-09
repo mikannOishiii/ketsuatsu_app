@@ -1,0 +1,26 @@
+- if @posts.present?
+  %table
+    %thead
+      %tr
+        %th 記事タイトル
+        %th ステータス
+        %th 作成者
+        %th 投稿日時
+    %tbody
+      - @posts.each do |post|
+        %tr
+          %td.td-entry-title
+            .entry-table-cell
+              .entry-title
+                = link_to post.title, edit_admins_post_path(post)
+              .entry-body
+          %td.td-post-status
+            - if post.draft?
+              下書き
+            - elsif post.published?
+              公開
+            - else
+              非公開
+          %td.td-post-author
+          %td.td-post-description
+            = l post.created_at, format: :short
