@@ -1,20 +1,5 @@
-<div class="admin-main">
 .admin_main
-  - if @posts.any?
-    %table.posts
-      %thead
-        %tr
-          %th 記事タイトル
-          %th 作成者
-          %th 投稿日時
-      %tbody
-        - @posts.each do |post|
-          %tr
-            %td.td-entry-title
-              .entry-table-cell
-                .entry-title
-                  = link_to post.title, edit_admins_post_path(post)
-                .entry-body
-            %td.td-post-author
-            %td.td-post-description
-              = l post.created_at, format: :short
+  .filter
+    = render "filter_by_status"
+  .posts
+    = render "posts", posts: @posts

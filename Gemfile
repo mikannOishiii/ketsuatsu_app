@@ -27,6 +27,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'unread'
 gem 'haml-rails'
+gem 'enum_help'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
