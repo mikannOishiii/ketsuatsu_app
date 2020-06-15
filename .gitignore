@@ -70,4 +70,7 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
+# アップロードされたテスト画像を無視する
+/public/uploads
+
 # End of https://www.gitignore.io/api/rails
