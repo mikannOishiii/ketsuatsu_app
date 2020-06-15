@@ -6,6 +6,16 @@
   .field
     = f.label :content, for: "inputContent"
     = f.text_field :content, placeholder: "記事本文", class: "form-control"
+
+  .field
+    = f.label :pictures
+    - @post.pictures.each do |picture|  
+      .post_pictures_box
+        = f.fields_for :pictures, picture do |pic|
+          = image_tag picture.name.url(:thumb) if picture.name?
+          = pic.label :name
+          = pic.file_field :name
+
   .field
     = f.label :status, for: "inputStatus"
     = f.select :status, Post.statuses_i18n.invert, {}, { class: "form-control" }
@@ -13,3 +23,6 @@
   = f.submit "投稿する", class: "btn btn-primary"
 
 = link_to "削除する", admins_post_path(@post.id), method: :delete, data: { confirm: "削除してよろしいですか？" }
+
+- @post.pictures.each do |picture|
+  = image_tag picture.name.url if picture.name.present?

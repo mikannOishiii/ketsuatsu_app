@@ -8,6 +8,15 @@
     = f.text_area :content, placeholder: "記事本文...", class: "form-control"
 
   .field
+    = f.label :pictures
+    - @post.pictures.each do |picture|  
+      .post_pictures_box
+        = f.fields_for :pictures, picture do |pic|
+          = image_tag picture.name.url(:thumb) if picture.name?
+          = pic.label :name
+          = pic.file_field :name
+
+  .field
     = f.label :status, for: "inputStatus"
     = f.select :status, Post.statuses_i18n.invert, {}, { class: "form-control" }
 
