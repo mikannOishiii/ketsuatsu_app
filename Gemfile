@@ -28,6 +28,8 @@ gem 'omniauth-twitter'
 gem 'unread'
 gem 'haml-rails'
 gem 'enum_help'
+gem 'carrierwave'
+gem 'mini_magick'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -60,6 +62,10 @@ group :test do
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'rspec-retry'
+end
+
+group :production do
+  gem 'fog'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

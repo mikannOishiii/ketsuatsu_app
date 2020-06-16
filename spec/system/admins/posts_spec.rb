@@ -12,6 +12,7 @@ RSpec.feature "Admins::Posts", type: :system do
     click_link "記事を書く"
     fill_in "post_title", with: "MyTitle hogehoge"
     fill_in "post_content", with: "MyContent hogehoge"
+    attach_file "post_pictures_attributes_0_name", "#{Rails.root}/spec/support/testfile.png"
     select "公開", from: "post[status]"
     click_button "投稿する"
     expect(page).to have_content "記事を投稿しました！"
