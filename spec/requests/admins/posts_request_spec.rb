@@ -96,6 +96,15 @@ RSpec.describe "Admins::Posts", type: :request do
       sign_in admin
     end
 
+    context "パラメータが妥当な場合（画像つき）" do
+      it "投稿・画像が登録されること" do
+        params = { pictures_attributes: [attributes_for(:picture)] }
+        expect do
+          post admins_posts_url, params: { post: attributes_for(:post).merge(params) }
+        end.to change(Post, :count).by(1).and change(Picture, :count).by(1)
+      end
+    end
+
     context "パラメータが妥当な場合" do
       it "リクエストが成功すること" do
         post admins_posts_url, params: { post: attributes_for(:post) }
