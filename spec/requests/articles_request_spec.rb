@@ -6,6 +6,10 @@ RSpec.describe "Articles", type: :request do
   let(:post2) { create(:post, title: "title2") }
   let(:post3) { create(:post, title: "title3") }
 
+  shared_examples_for "リクエストが成功する（200）" do
+    it { expect(response.status).to eq 200 }
+  end
+
   describe 'GET #index' do
     before do
       sign_in user
@@ -13,9 +17,7 @@ RSpec.describe "Articles", type: :request do
       get articles_url
     end
 
-    it "リクエストが成功すること" do
-      expect(response.status).to eq 200
-    end
+    it_behaves_like "リクエストが成功する（200）"
 
     it "@unread_articles（未読記事）が取得できていること" do
       within ".unread_articles" do
@@ -36,9 +38,7 @@ RSpec.describe "Articles", type: :request do
       get article_url(post1)
     end
 
-    it "リクエストが成功すること" do
-      expect(response.status).to eq 200
-    end
+    it_behaves_like "リクエストが成功する（200）"
 
     it "@articleが取得できていること" do
       expect(response.body).to include post1.title

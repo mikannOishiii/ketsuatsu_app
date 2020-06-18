@@ -1,23 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe "Records", type: :request do
+  shared_examples_for "リクエストが成功する（200）" do
+    it { expect(response.status).to eq 200 }
+  end
+
   describe 'GET #new' do
-    let(:user1) { create(:user) }
-    let(:user2) { create(:user) }
+    let!(:user1) { create(:user) }
+    let!(:user2) { create(:user) }
     let!(:record_today) { create(:record, user: user1) }
 
     context "今日のデータが存在する場合" do
       before do
         sign_in user1
+        get new_record_url
       end
 
-      it "リクエストが成功すること" do
-        get new_record_url
-        expect(response.status).to eq 200
-      end
+      it_behaves_like "リクエストが成功する（200）"
 
       it "@recordが取得できていること" do
-        get new_record_url
         expect(controller.instance_variable_get("@record")).to eq record_today
       end
     end
@@ -25,15 +26,12 @@ RSpec.describe "Records", type: :request do
     context "今日のデータが存在しない場合" do
       before do
         sign_in user2
+        get new_record_url
       end
 
-      it "リクエストが成功すること" do
-        get new_record_url
-        expect(response.status).to eq 200
-      end
+      it_behaves_like "リクエストが成功する（200）"
 
       it "@recordが取得できていること" do
-        get new_record_url
         expect(controller.instance_variable_get("@record")).to be_a_new Record
       end
     end
@@ -42,46 +40,26 @@ RSpec.describe "Records", type: :request do
   describe 'POST #create' do
     let(:user) { create(:user) }
 
+    before do
+      sign_in user
+    end
+
     context "パラメータが妥当な場合" do
-      before do
-        sign_in user
-      end
+      subject { post records_url, params: { record: attributes_for(:record) } }
 
-      it "リクエストが成功すること" do
-        post records_url, params: { record: attributes_for(:record) }
-        expect(response.status).to eq 302
-      end
-
-      it "recordが登録されること" do
-        expect do
-          post records_url, params: { record: attributes_for(:record) }
-        end.to change(Record, :count).by(1)
-      end
-
-      it "リダイレクトすること" do
-        post records_url, params: { record: attributes_for(:record) }
-        expect(response).to redirect_to root_url
-      end
+      it { is_expected.to eq 302 }
+      it { expect { subject }.to change(Record, :count).by(1) }
+      it { is_expected.to redirect_to root_url }
     end
 
     context "パラメータが不正な場合" do
-      before do
-        sign_in user
-      end
+      subject { post records_url, params: { record: attributes_for(:record, :invalid), format: :js } }
 
-      it "リクエストに成功すること" do
-        post records_url, params: { record: attributes_for(:record, :invalid), format: :js }
-        expect(response.status).to eq 200
-      end
-
-      it "recordが登録されないこと" do
-        expect do
-          post records_url, params: { record: attributes_for(:record, :invalid), format: :js }
-        end.not_to change(Record, :count)
-      end
+      it { is_expected.to eq 200 }
+      it { expect { subject }.not_to change(Record, :count) }
 
       it "エラーが表示されること" do
-        post records_url, params: { record: attributes_for(:record, :invalid), format: :js }
+        expect(subject)
         expect(response.body).to include "朝の最高血圧は数値で入力してください"
       end
     end
@@ -97,49 +75,34 @@ RSpec.describe "Records", type: :request do
       { date: record.date, m_sbp: "str", m_dbp: 100 }
     end
 
-    context "パラメータが妥当な場合" do
-      before do
-        sign_in user
-      end
+    before do
+      sign_in user
+    end
 
-      it "リクエストに成功すること" do
-        put record_url record, params: { date: record.date, record: update_attributes }, session: {}
-        expect(response.status).to eq 302
-      end
-      it "recordが更新されること" do
-        expect do
-          put record_url record, params: { id: record.id, record: update_attributes }, session: {}
-        end.to change { Record.find(record.id).m_sbp }.to eq 100
-      end
-      it "リダイレクトすること"  do
-        put record_url record, params: { id: record.id, record: update_attributes }, session: {}
-        expect(response).to redirect_to root_url
-      end
+    context "パラメータが妥当な場合" do
+      subject { put record_url record, params: { date: record.date, record: update_attributes }, session: {} }
+
+      it { is_expected.to eq 302 }
+      it { expect { subject }.to change { Record.find(record.id).m_sbp }.to eq 100 }
+      it { is_expected.to redirect_to root_url }
     end
 
     context "パラメータが不正な場合" do
-      before do
-        sign_in user
-      end
+      subject { put record_url record, params: { date: record.date, record: update_attributes_invalid, format: :js }, session: {} }
 
-      it "リクエストに成功すること" do
-        put record_url record, params: { date: record.date, record: update_attributes_invalid, format: :js }, session: {}
-        expect(response.status).to eq 200
-      end
+      it { is_expected.to eq 200 }
+      it { expect { subject }.not_to change { Record.find(record.id).m_sbp } }
 
-      it "recordが更新されないこと" do
-        expect do
-          put record_url record, params: { id: record.id, record: update_attributes_invalid, format: :js }, session: {}
-        end.not_to change { Record.find(record.id).m_sbp }
-      end
       it "エラーが表示されること" do
-        put record_url record, params: { date: record.date, record: update_attributes_invalid, format: :js }, session: {}
+        expect(subject)
         expect(response.body).to include "朝の最高血圧は数値で入力してください"
       end
     end
   end
 
   describe 'DELETE #destroy' do
+    subject { delete record_url record }
+
     let(:user) { create(:user) }
     let!(:record) { create(:record, user: user) }
 
@@ -147,20 +110,9 @@ RSpec.describe "Records", type: :request do
       sign_in user
     end
 
-    it "リクエストが成功すること" do
-      delete record_url record
-      expect(response.status).to eq 302
-    end
+    it { is_expected.to eq 302 }
+    it { expect { subject }.to change(Record, :count).by(-1) }
+    it { is_expected.to redirect_to root_url }
 
-    it "記録が削除されること" do
-      expect do
-        delete record_url record
-      end.to change(Record, :count).by(-1)
-    end
-
-    it "リダイレクトされること" do
-      delete record_url record
-      expect(response).to redirect_to root_url
-    end
   end
 end

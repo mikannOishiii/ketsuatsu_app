@@ -5,19 +5,31 @@ RSpec.describe "Admins::Posts", type: :request do
   let!(:post1) { create(:post, title: "mytitle1", content: "mycontent1", admin: admin) }
   let!(:post2) { create(:post, title: "mytitle2", content: "mycontent2", admin: admin) }
 
+  shared_examples_for "リクエストが成功する（302）" do
+    it { expect(response.status).to eq 302 }
+  end
+
+  shared_examples_for "リクエストが成功する（200）" do
+    it { expect(response.status).to eq 200 }
+  end
+
+  shared_examples_for "new_admin_session_urlにリダイレクトされること" do
+    it { expect(response).to redirect_to new_admin_session_url }
+  end
+
+  shared_examples_for "admins_dashboard_urlにリダイレクトされること" do
+    it { expect(response).to redirect_to admins_dashboard_url }
+  end
+
   describe "GET #index" do
     context "ログインしていない場合" do
       before do
         get admins_posts_url
       end
 
-      it "リクエストが成功すること" do
-        expect(response.status).to eq 302
-      end
+      it_behaves_like "リクエストが成功する（302）"
+      it_behaves_like "new_admin_session_urlにリダイレクトされること"
 
-      it "リダイレクトされること" do
-        expect(response).to redirect_to new_admin_session_url
-      end
     end
 
     context "ログインしている場合" do
@@ -26,9 +38,7 @@ RSpec.describe "Admins::Posts", type: :request do
         get admins_posts_url
       end
 
-      it "リクエストが成功すること" do
-        expect(response.status).to eq 200
-      end
+      it_behaves_like "リクエストが成功する（200）"
 
       it "記事タイトルが表示されていること" do
         expect(response.body).to include "mytitle1"
@@ -43,13 +53,8 @@ RSpec.describe "Admins::Posts", type: :request do
         get new_admins_post_url
       end
 
-      it "リクエストが成功すること" do
-        expect(response.status).to eq 302
-      end
-
-      it "リダイレクトされること" do
-        expect(response).to redirect_to new_admin_session_url
-      end
+      it_behaves_like "リクエストが成功する（302）"
+      it_behaves_like "new_admin_session_urlにリダイレクトされること"
     end
 
     context "ログインしている場合" do
@@ -58,9 +63,7 @@ RSpec.describe "Admins::Posts", type: :request do
         get new_admins_post_url
       end
 
-      it "リクエストが成功すること" do
-        expect(response.status).to eq 200
-      end
+      it_behaves_like "リクエストが成功する（200）"
     end
   end
 
@@ -70,13 +73,8 @@ RSpec.describe "Admins::Posts", type: :request do
         get edit_admins_post_url(post1)
       end
 
-      it "リクエストが成功すること" do
-        expect(response.status).to eq 302
-      end
-
-      it "リダイレクトされること" do
-        expect(response).to redirect_to new_admin_session_url
-      end
+      it_behaves_like "リクエストが成功する（302）"
+      it_behaves_like "new_admin_session_urlにリダイレクトされること"
     end
 
     context "ログインしている場合" do
@@ -85,9 +83,7 @@ RSpec.describe "Admins::Posts", type: :request do
         get edit_admins_post_url(post1)
       end
 
-      it "リクエストが成功すること" do
-        expect(response.status).to eq 200
-      end
+      it_behaves_like "リクエストが成功する（200）"
     end
   end
 
@@ -106,39 +102,27 @@ RSpec.describe "Admins::Posts", type: :request do
     end
 
     context "パラメータが妥当な場合" do
-      it "リクエストが成功すること" do
-        post admins_posts_url, params: { post: attributes_for(:post) }
-        expect(response.status).to eq 302
-      end
+      subject { post admins_posts_url, params: { post: attributes_for(:post) } }
 
-      it "投稿が登録されること" do
-        expect do
-          post admins_posts_url, params: { post: attributes_for(:post) }
-        end.to change(Post, :count).by(1)
-      end
+      it { is_expected.to eq 302 }
 
-      it "リダイレクトされること" do
-        post admins_posts_url, params: { post: attributes_for(:post) }
-        expect(response).to redirect_to admins_dashboard_url
-      end
+      it { expect { subject }.to change(Post, :count).by(1) }
+
+      it { is_expected.to redirect_to admins_dashboard_url }
     end
 
     context "パラメータが不正な場合" do
-      it "リクエストが成功すること" do
-        post admins_posts_url, params: { post: attributes_for(:post, :invalid) }
-        expect(response.status).to eq 200
-      end
+      subject { post admins_posts_url, params: { post: attributes_for(:post, :invalid) } }
+      
+      it { is_expected.to eq 200 }
 
-      it "投稿は登録されないこと" do
-        expect do
-          post admins_posts_url, params: { post: attributes_for(:post, :invalid) }
-        end.not_to change(Post, :count)
-      end
+      it { expect { subject }.not_to change(Post, :count) }
 
       it "エラーが表示されること" do
-        post admins_posts_url, params: { post: attributes_for(:post, :invalid) }
+        expect(subject)
         expect(response.body).to include "Titleを入力してください"
       end
+      
     end
   end
 
@@ -148,61 +132,41 @@ RSpec.describe "Admins::Posts", type: :request do
     end
 
     context "パラメータが妥当な場合" do
-      it "リクエストが成功すること" do
-        put admins_post_url post1, params: { post: attributes_for(:post) }
-        expect(response.status).to eq 302
-      end
+      subject { put admins_post_url post1, params: { post: attributes_for(:post) } }
 
-      it "内容が更新されること" do
-        expect do
-          put admins_post_url post1, params: { post: attributes_for(:post) }
-        end.to change { Post.find(post1.id).title }.from("mytitle1").to("MyTitle")
-      end
+      it { is_expected.to eq 302 }
 
-      it "リダイレクトすること" do
-        put admins_post_url post1, params: { post: attributes_for(:post) }
-        expect(response).to redirect_to admins_dashboard_url
-      end
+      it { expect { subject }.to change { Post.find(post1.id).title }.from("mytitle1").to("MyTitle") }
+
+      it { is_expected.to redirect_to admins_dashboard_url }
     end
 
     context "パラメータが不正な場合" do
-      it "リクエストが成功すること" do
-        put admins_post_url post1, params: { post: attributes_for(:post, :invalid) }
-        expect(response.status).to eq 200
-      end
+      subject { put admins_post_url post1, params: { post: attributes_for(:post, :invalid) } }
+      
 
-      it "内容が変更されないこと" do
-        expect do
-          put admins_post_url post1, params: { post: attributes_for(:post, :invalid) }
-        end.not_to change(Post.find(post1.id), :title)
-      end
+      it { is_expected.to eq 200 }
+
+      it { expect { subject }.not_to change(Post.find(post1.id), :title) }
 
       it "エラーが表示されること" do
-        put admins_post_url post1, params: { post: attributes_for(:post, :invalid) }
+        expect(subject)
         expect(response.body).to include "Titleを入力してください"
       end
     end
   end
 
   describe "DELETE #destroy" do
+    subject { delete admins_post_url post1 }
+
     before do
       sign_in admin
     end
 
-    it "リクエストが成功すること" do
-      delete admins_post_url post1
-      expect(response.status).to eq 302
-    end
+    it { is_expected.to eq 302 }
 
-    it "投稿が削除されること" do
-      expect do
-        delete admins_post_url post1
-      end.to change(Post, :count).by(-1)
-    end
+    it { expect { subject }.to change(Post, :count).by(-1) }
 
-    it "リダイレクトすること" do
-      delete admins_post_url post1
-      expect(response).to redirect_to admins_dashboard_url
-    end
+    it { is_expected.to redirect_to admins_dashboard_url }
   end
 end
