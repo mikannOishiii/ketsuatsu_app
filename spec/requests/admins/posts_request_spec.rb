@@ -29,7 +29,6 @@ RSpec.describe "Admins::Posts", type: :request do
 
       it_behaves_like "リクエストが成功する（302）"
       it_behaves_like "new_admin_session_urlにリダイレクトされること"
-
     end
 
     context "ログインしている場合" do
@@ -113,7 +112,7 @@ RSpec.describe "Admins::Posts", type: :request do
 
     context "パラメータが不正な場合" do
       subject { post admins_posts_url, params: { post: attributes_for(:post, :invalid) } }
-      
+
       it { is_expected.to eq 200 }
 
       it { expect { subject }.not_to change(Post, :count) }
@@ -122,7 +121,6 @@ RSpec.describe "Admins::Posts", type: :request do
         expect(subject)
         expect(response.body).to include "Titleを入力してください"
       end
-      
     end
   end
 
@@ -143,7 +141,6 @@ RSpec.describe "Admins::Posts", type: :request do
 
     context "パラメータが不正な場合" do
       subject { put admins_post_url post1, params: { post: attributes_for(:post, :invalid) } }
-      
 
       it { is_expected.to eq 200 }
 

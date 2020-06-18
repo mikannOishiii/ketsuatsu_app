@@ -40,9 +40,7 @@ RSpec.describe "Records", type: :request do
   describe 'POST #create' do
     let(:user) { create(:user) }
 
-    before do
-      sign_in user
-    end
+    before { sign_in user }
 
     context "パラメータが妥当な場合" do
       subject { post records_url, params: { record: attributes_for(:record) } }
@@ -75,12 +73,12 @@ RSpec.describe "Records", type: :request do
       { date: record.date, m_sbp: "str", m_dbp: 100 }
     end
 
-    before do
-      sign_in user
-    end
+    before { sign_in user }
 
     context "パラメータが妥当な場合" do
-      subject { put record_url record, params: { date: record.date, record: update_attributes }, session: {} }
+      subject do
+        put record_url record, params: { record: update_attributes }, session: {}
+      end
 
       it { is_expected.to eq 302 }
       it { expect { subject }.to change { Record.find(record.id).m_sbp }.to eq 100 }
@@ -88,7 +86,9 @@ RSpec.describe "Records", type: :request do
     end
 
     context "パラメータが不正な場合" do
-      subject { put record_url record, params: { date: record.date, record: update_attributes_invalid, format: :js }, session: {} }
+      subject do
+        put record_url record, params: { record: update_attributes_invalid, format: :js }, session: {}
+      end
 
       it { is_expected.to eq 200 }
       it { expect { subject }.not_to change { Record.find(record.id).m_sbp } }
@@ -106,13 +106,10 @@ RSpec.describe "Records", type: :request do
     let(:user) { create(:user) }
     let!(:record) { create(:record, user: user) }
 
-    before do
-      sign_in user
-    end
+    before { sign_in user }
 
     it { is_expected.to eq 302 }
     it { expect { subject }.to change(Record, :count).by(-1) }
     it { is_expected.to redirect_to root_url }
-
   end
 end
